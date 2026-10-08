@@ -8,8 +8,8 @@ import (
 
 var C Config
 
-// init 加载配置
-func init() {
+// InitConfig 加载配置
+func InitConfig() {
 	v := viper.New()
 
 	// 设置配置文件路径

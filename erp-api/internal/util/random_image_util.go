@@ -30,7 +30,7 @@ var (
 	captcha *base64Captcha.Captcha
 )
 
-func init() {
+func InitRandomImageUtil() {
 	bgColor := &color.RGBA{R: 200, G: 200, B: 200, A: 200}
 
 	driverString := base64Captcha.DriverString{

@@ -6,10 +6,11 @@ import (
 )
 
 func InitRouter(router *gin.RouterGroup) {
-	bindUserGroup(router)
+	bindUserHandler(router)
 }
 
-func bindUserGroup(router *gin.RouterGroup) {
+// bindUserHandler 用户管理
+func bindUserHandler(router *gin.RouterGroup) {
 	relativePath := "/user"
 
 	r := router.Group(relativePath)
@@ -17,4 +18,18 @@ func bindUserGroup(router *gin.RouterGroup) {
 
 	r.GET("/randomImage", h.RandomImage)
 	r.POST("/login", h.Login)
+}
+
+// 平台参数
+func bindPlatformConfigHandler(router *gin.RouterGroup) {
+	relativePath := "/platformConfig"
+
+	r := router.Group(relativePath)
+	h := handler.NewPlatformConfigHandler()
+
+	r.GET("/getPlatform/name", h.GetPlatformName)
+	r.GET("/getPlatform/url", h.GetPlatformUrl)
+	r.GET("/getPlatform/registerFlag", h.GetPlatformRegisterFlag)
+	r.GET("/getPlatform/checkcodeFlag", h.GetPlatformCheckCodeFlag)
+	r.GET("/getPlatform/appVersion", h.GetPlatformAppVersion)
 }

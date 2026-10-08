@@ -9,9 +9,9 @@ import (
 	"gorm.io/gorm"
 )
 
-// todo 改写成 func init() 单例模式
+var DB *gorm.DB
 
-func InitDatabase(cfg config.DatabaseConfig) (db *gorm.DB, err error) {
+func InitDatabase(cfg config.DatabaseConfig) {
 	mySQL := cfg.MySQL
 
 	dsn := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=True&loc=%s",
@@ -25,6 +25,11 @@ func InitDatabase(cfg config.DatabaseConfig) (db *gorm.DB, err error) {
 	)
 	slog.Info("连接数据库", "dsn", dsn)
 
-	db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	return
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		slog.Error(err.Error())
+		panic("连接数据库失败")
+	}
+
+	DB = db
 }
