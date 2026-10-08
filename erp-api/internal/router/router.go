@@ -16,4 +16,5 @@ func bindUserGroup(router *gin.Engine) {
 	h := handler.NewUserHandler()
 
 	r.GET("/randomImage", h.RandomImage)
+	r.POST("/login", h.Login)
 }

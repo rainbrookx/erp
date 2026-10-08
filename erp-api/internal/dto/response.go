@@ -1,4 +1,4 @@
-package resp
+package dto
 
 // Response 统一返回结构体
 type Response[T any] struct {

@@ -1,4 +1,4 @@
-package tool
+package util
 
 import (
 	"image/color"
@@ -17,7 +17,7 @@ const (
 var (
 	// captchaDriver 验证码驱动单例，全局唯一
 	captchaDriver base64Captcha.Driver
-	// captchaStore 内存存储单例
+	// captchaStore 内存存储单例 todo 改成 redis
 	captchaStore base64Captcha.Store
 )
 

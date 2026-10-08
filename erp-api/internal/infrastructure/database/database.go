@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log/slog"
 
-	config "github.com/rainbrookx/erp/configs"
+	"github.com/rainbrookx/erp/internal/infrastructure/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
