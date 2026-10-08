@@ -2,6 +2,8 @@ package util
 
 import (
 	"image/color"
+	"strings"
+	"uuid"
 
 	"github.com/mojocn/base64Captcha"
 )
@@ -15,10 +17,17 @@ const (
 )
 
 var (
-	// captchaDriver 验证码驱动单例，全局唯一
+	// rawDriver 原始的驱动
+	rawDriver *base64Captcha.DriverString
+
+	// captchaDriver 验证码驱动
 	captchaDriver base64Captcha.Driver
-	// captchaStore 内存存储单例 todo 改成 redis
+
+	// captchaStore 内存存储 todo 改成 redis
 	captchaStore base64Captcha.Store
+
+	// captcha 验证码生成工具
+	captcha *base64Captcha.Captcha
 )
 
 func init() {
@@ -33,16 +42,33 @@ func init() {
 		ShowLineOptions: base64Captcha.OptionShowHollowLine | base64Captcha.OptionShowSlimeLine,
 	}
 
-	captchaDriver = driverString.ConvertFonts()
+	rawDriver = driverString.ConvertFonts()
+	captchaDriver = &CustomUUIDDriver{
+		DriverString: rawDriver,
+	}
 	captchaStore = base64Captcha.DefaultMemStore
+	captcha = base64Captcha.NewCaptcha(captchaDriver, captchaStore)
 }
 
 func GenerateCaptcha() (id, b64s, answer string, err error) {
-	captcha := base64Captcha.NewCaptcha(captchaDriver, captchaStore)
 	id, b64s, answer, err = captcha.Generate()
 	return
 }
 
-func VerifyCaptcha(id string, value string) bool {
-	return captchaStore.Verify(id, value, true)
+func VerifyCaptcha(id string, answer string) bool {
+	return captchaStore.Verify(id, answer, true)
 }
+
+// === Start CustomUUIDDriver ===
+
+type CustomUUIDDriver struct {
+	*base64Captcha.DriverString
+}
+
+func (d *CustomUUIDDriver) GenerateIdQuestionAnswer() (id, content, answer string) {
+	_, content, answer = d.DriverString.GenerateIdQuestionAnswer()
+	id = strings.ReplaceAll(uuid.New().String(), "-", "")
+	return
+}
+
+// === End CustomUUIDDriver ===
