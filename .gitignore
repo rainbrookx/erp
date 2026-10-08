@@ -8,3 +8,7 @@
 
 ## front
 **/*.lock
+
+## fyx
+/doc/
+.vscode/
