@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameMaterial_extend = "jsh_material_extend"
+const TableNameMaterialExtend = "jsh_material_extend"
 
-// Material_extend 产品价格扩展
-type Material_extend struct {
+// MaterialExtend 产品价格扩展
+type MaterialExtend struct {
 	ID               int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`           // 主键
 	MaterialID       int64     `gorm:"column:material_id;comment:商品id" json:"materialId"`                      // 商品id
 	BarCode          string    `gorm:"column:bar_code;comment:商品条码" json:"barCode"`                            // 商品条码
@@ -30,7 +30,7 @@ type Material_extend struct {
 	DeleteFlag       string    `gorm:"column:delete_Flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`             // 删除标记，0未删除，1删除
 }
 
-// TableName Material_extend's table name
-func (*Material_extend) TableName() string {
-	return TableNameMaterial_extend
+// TableName MaterialExtend's table name
+func (*MaterialExtend) TableName() string {
+	return TableNameMaterialExtend
 }

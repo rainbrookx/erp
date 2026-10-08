@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameMaterial_attribute = "jsh_material_attribute"
+const TableNameMaterialAttribute = "jsh_material_attribute"
 
-// Material_attribute 产品属性表
-type Material_attribute struct {
+// MaterialAttribute 产品属性表
+type MaterialAttribute struct {
 	ID             int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	AttributeName  string `gorm:"column:attribute_name;comment:属性名" json:"attributeName"`     // 属性名
 	AttributeValue string `gorm:"column:attribute_value;comment:属性值" json:"attributeValue"`   // 属性值
@@ -15,7 +15,7 @@ type Material_attribute struct {
 	DeleteFlag     string `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
-// TableName Material_attribute's table name
-func (*Material_attribute) TableName() string {
-	return TableNameMaterial_attribute
+// TableName MaterialAttribute's table name
+func (*MaterialAttribute) TableName() string {
+	return TableNameMaterialAttribute
 }

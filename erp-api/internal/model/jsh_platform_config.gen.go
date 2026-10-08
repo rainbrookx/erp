@@ -4,17 +4,17 @@
 
 package model
 
-const TableNamePlatform_config = "jsh_platform_config"
+const TableNamePlatformConfig = "jsh_platform_config"
 
-// Platform_config 平台参数
-type Platform_config struct {
+// PlatformConfig 平台参数
+type PlatformConfig struct {
 	ID              int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
 	PlatformKey     string `gorm:"column:platform_key;comment:关键词" json:"platformKey"`            // 关键词
 	PlatformKeyInfo string `gorm:"column:platform_key_info;comment:关键词名称" json:"platformKeyInfo"` // 关键词名称
 	PlatformValue   string `gorm:"column:platform_value;comment:值" json:"platformValue"`          // 值
 }
 
-// TableName Platform_config's table name
-func (*Platform_config) TableName() string {
-	return TableNamePlatform_config
+// TableName PlatformConfig's table name
+func (*PlatformConfig) TableName() string {
+	return TableNamePlatformConfig
 }

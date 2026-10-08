@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameSys_dict_type = "jsh_sys_dict_type"
+const TableNameSysDictType = "jsh_sys_dict_type"
 
-// Sys_dict_type 字典类型表
-type Sys_dict_type struct {
+// SysDictType 字典类型表
+type SysDictType struct {
 	DictID     int64     `gorm:"column:dict_id;primaryKey;autoIncrement:true;comment:字典主键" json:"dictId"` // 字典主键
 	DictName   string    `gorm:"column:dict_name;comment:字典名称" json:"dictName"`                           // 字典名称
 	DictType   string    `gorm:"column:dict_type;comment:字典类型" json:"dictType"`                           // 字典类型
@@ -24,7 +24,7 @@ type Sys_dict_type struct {
 	DeleteFlag string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`              // 删除标记，0未删除，1删除
 }
 
-// TableName Sys_dict_type's table name
-func (*Sys_dict_type) TableName() string {
-	return TableNameSys_dict_type
+// TableName SysDictType's table name
+func (*SysDictType) TableName() string {
+	return TableNameSysDictType
 }

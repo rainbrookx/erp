@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameDepot_item = "jsh_depot_item"
+const TableNameDepotItem = "jsh_depot_item"
 
-// Depot_item 单据子表
-type Depot_item struct {
+// DepotItem 单据子表
+type DepotItem struct {
 	ID                int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`     // 主键
 	HeaderID          int64     `gorm:"column:header_id;not null;comment:表头Id" json:"headerId"`           // 表头Id
 	MaterialID        int64     `gorm:"column:material_id;not null;comment:商品Id" json:"materialId"`       // 商品Id
@@ -39,7 +39,7 @@ type Depot_item struct {
 	DeleteFlag        string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`       // 删除标记，0未删除，1删除
 }
 
-// TableName Depot_item's table name
-func (*Depot_item) TableName() string {
-	return TableNameDepot_item
+// TableName DepotItem's table name
+func (*DepotItem) TableName() string {
+	return TableNameDepotItem
 }

@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameSerial_number = "jsh_serial_number"
+const TableNameSerialNumber = "jsh_serial_number"
 
-// Serial_number 序列号表
-type Serial_number struct {
+// SerialNumber 序列号表
+type SerialNumber struct {
 	ID           int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
 	MaterialID   int64     `gorm:"column:material_id;comment:产品表id" json:"materialId"`           // 产品表id
 	DepotID      int64     `gorm:"column:depot_id;comment:仓库id" json:"depotId"`                  // 仓库id
@@ -29,7 +29,7 @@ type Serial_number struct {
 	DeleteFlag   string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
 }
 
-// TableName Serial_number's table name
-func (*Serial_number) TableName() string {
-	return TableNameSerial_number
+// TableName SerialNumber's table name
+func (*SerialNumber) TableName() string {
+	return TableNameSerialNumber
 }

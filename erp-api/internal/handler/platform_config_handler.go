@@ -32,8 +32,3 @@ func (h *PlatformConfigHandler) GetPlatformCheckCodeFlag(c *gin.Context) {
 func (h *PlatformConfigHandler) GetPlatformAppVersion(c *gin.Context) {
 
 }
-
-// todo 未实现
-func (h *PlatformConfigHandler) getPlatform() {
-
-}

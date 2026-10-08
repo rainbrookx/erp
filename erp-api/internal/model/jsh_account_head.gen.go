@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameAccount_head = "jsh_account_head"
+const TableNameAccountHead = "jsh_account_head"
 
-// Account_head 财务主表
-type Account_head struct {
+// AccountHead 财务主表
+type AccountHead struct {
 	ID            int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`       // 主键
 	Type          string    `gorm:"column:type;comment:类型(支出/收入/收款/付款/转账)" json:"type"`                 // 类型(支出/收入/收款/付款/转账)
 	OrganID       int64     `gorm:"column:organ_id;comment:单位Id(收款/付款单位)" json:"organId"`               // 单位Id(收款/付款单位)
@@ -31,7 +31,7 @@ type Account_head struct {
 	DeleteFlag    string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`         // 删除标记，0未删除，1删除
 }
 
-// TableName Account_head's table name
-func (*Account_head) TableName() string {
-	return TableNameAccount_head
+// TableName AccountHead's table name
+func (*AccountHead) TableName() string {
+	return TableNameAccountHead
 }

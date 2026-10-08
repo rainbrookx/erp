@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameSystem_config = "jsh_system_config"
+const TableNameSystemConfig = "jsh_system_config"
 
-// System_config 系统参数
-type System_config struct {
+// SystemConfig 系统参数
+type SystemConfig struct {
 	ID                      int64  `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`                                 // 主键
 	CompanyName             string `gorm:"column:company_name;comment:公司名称" json:"companyName"`                                          // 公司名称
 	CompanyContacts         string `gorm:"column:company_contacts;comment:公司联系人" json:"companyContacts"`                                 // 公司联系人
@@ -36,7 +36,7 @@ type System_config struct {
 	DeleteFlag              string `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`                                   // 删除标记，0未删除，1删除
 }
 
-// TableName System_config's table name
-func (*System_config) TableName() string {
-	return TableNameSystem_config
+// TableName SystemConfig's table name
+func (*SystemConfig) TableName() string {
+	return TableNameSystemConfig
 }

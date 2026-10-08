@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameMaterial_property = "jsh_material_property"
+const TableNameMaterialProperty = "jsh_material_property"
 
-// Material_property 产品扩展字段表
-type Material_property struct {
+// MaterialProperty 产品扩展字段表
+type MaterialProperty struct {
 	ID          int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
 	NativeName  string  `gorm:"column:native_name;comment:原始名称" json:"nativeName"`            // 原始名称
 	Enabled     []uint8 `gorm:"column:enabled;comment:是否启用" json:"enabled"`                   // 是否启用
@@ -17,7 +17,7 @@ type Material_property struct {
 	DeleteFlag  string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
 }
 
-// TableName Material_property's table name
-func (*Material_property) TableName() string {
-	return TableNameMaterial_property
+// TableName MaterialProperty's table name
+func (*MaterialProperty) TableName() string {
+	return TableNameMaterialProperty
 }

@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameDepot_head = "jsh_depot_head"
+const TableNameDepotHead = "jsh_depot_head"
 
-// Depot_head 单据主表
-type Depot_head struct {
+// DepotHead 单据主表
+type DepotHead struct {
 	ID                int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`               // 主键
 	Type              string    `gorm:"column:type;comment:类型(出库/入库)" json:"type"`                                  // 类型(出库/入库)
 	SubType           string    `gorm:"column:sub_type;comment:出入库分类" json:"subType"`                               // 出入库分类
@@ -49,7 +49,7 @@ type Depot_head struct {
 	DeleteFlag        string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`                 // 删除标记，0未删除，1删除
 }
 
-// TableName Depot_head's table name
-func (*Depot_head) TableName() string {
-	return TableNameDepot_head
+// TableName DepotHead's table name
+func (*DepotHead) TableName() string {
+	return TableNameDepotHead
 }

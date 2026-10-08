@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameMaterial_category = "jsh_material_category"
+const TableNameMaterialCategory = "jsh_material_category"
 
-// Material_category 产品类型表
-type Material_category struct {
+// MaterialCategory 产品类型表
+type MaterialCategory struct {
 	ID            int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
 	Name          string    `gorm:"column:name;comment:名称" json:"name"`                           // 名称
 	CategoryLevel int32     `gorm:"column:category_level;comment:等级" json:"categoryLevel"`        // 等级
@@ -25,7 +25,7 @@ type Material_category struct {
 	DeleteFlag    string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
 }
 
-// TableName Material_category's table name
-func (*Material_category) TableName() string {
-	return TableNameMaterial_category
+// TableName MaterialCategory's table name
+func (*MaterialCategory) TableName() string {
+	return TableNameMaterialCategory
 }

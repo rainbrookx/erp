@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-const TableNameOrga_user_rel = "jsh_orga_user_rel"
+const TableNameOrgaUserRel = "jsh_orga_user_rel"
 
-// Orga_user_rel 部门用户关系表
-type Orga_user_rel struct {
+// OrgaUserRel 部门用户关系表
+type OrgaUserRel struct {
 	ID                  int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`                   // 主键
 	OrgaID              int64     `gorm:"column:orga_id;comment:部门id" json:"orgaId"`                                      // 部门id
 	UserID              int64     `gorm:"column:user_id;not null;comment:用户id" json:"userId"`                             // 用户id
@@ -24,7 +24,7 @@ type Orga_user_rel struct {
 	TenantID            int64     `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                                  // 租户id
 }
 
-// TableName Orga_user_rel's table name
-func (*Orga_user_rel) TableName() string {
-	return TableNameOrga_user_rel
+// TableName OrgaUserRel's table name
+func (*OrgaUserRel) TableName() string {
+	return TableNameOrgaUserRel
 }

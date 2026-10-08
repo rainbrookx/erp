@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameMaterial_initial_stock = "jsh_material_initial_stock"
+const TableNameMaterialInitialStock = "jsh_material_initial_stock"
 
-// Material_initial_stock 产品初始库存
-type Material_initial_stock struct {
+// MaterialInitialStock 产品初始库存
+type MaterialInitialStock struct {
 	ID            int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
 	MaterialID    int64   `gorm:"column:material_id;comment:产品id" json:"materialId"`            // 产品id
 	DepotID       int64   `gorm:"column:depot_id;comment:仓库id" json:"depotId"`                  // 仓库id
@@ -18,7 +18,7 @@ type Material_initial_stock struct {
 	DeleteFlag    string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
 }
 
-// TableName Material_initial_stock's table name
-func (*Material_initial_stock) TableName() string {
-	return TableNameMaterial_initial_stock
+// TableName MaterialInitialStock's table name
+func (*MaterialInitialStock) TableName() string {
+	return TableNameMaterialInitialStock
 }

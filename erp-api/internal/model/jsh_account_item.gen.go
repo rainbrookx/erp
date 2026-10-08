@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameAccount_item = "jsh_account_item"
+const TableNameAccountItem = "jsh_account_item"
 
-// Account_item 财务子表
-type Account_item struct {
+// AccountItem 财务子表
+type AccountItem struct {
 	ID          int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
 	HeaderID    int64   `gorm:"column:header_id;not null;comment:表头Id" json:"headerId"`       // 表头Id
 	AccountID   int64   `gorm:"column:account_id;comment:账户Id" json:"accountId"`              // 账户Id
@@ -21,7 +21,7 @@ type Account_item struct {
 	DeleteFlag  string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
 }
 
-// TableName Account_item's table name
-func (*Account_item) TableName() string {
-	return TableNameAccount_item
+// TableName AccountItem's table name
+func (*AccountItem) TableName() string {
+	return TableNameAccountItem
 }

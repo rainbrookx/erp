@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameIn_out_item = "jsh_in_out_item"
+const TableNameInOutItem = "jsh_in_out_item"
 
-// In_out_item 收支项目
-type In_out_item struct {
+// InOutItem 收支项目
+type InOutItem struct {
 	ID         int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
 	Name       string  `gorm:"column:name;comment:名称" json:"name"`                           // 名称
 	Type       string  `gorm:"column:type;comment:类型" json:"type"`                           // 类型
@@ -18,7 +18,7 @@ type In_out_item struct {
 	DeleteFlag string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
 }
 
-// TableName In_out_item's table name
-func (*In_out_item) TableName() string {
-	return TableNameIn_out_item
+// TableName InOutItem's table name
+func (*InOutItem) TableName() string {
+	return TableNameInOutItem
 }

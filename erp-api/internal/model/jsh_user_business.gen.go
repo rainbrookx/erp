@@ -4,10 +4,10 @@
 
 package model
 
-const TableNameUser_business = "jsh_user_business"
+const TableNameUserBusiness = "jsh_user_business"
 
-// User_business 用户/角色/模块关系表
-type User_business struct {
+// UserBusiness 用户/角色/模块关系表
+type UserBusiness struct {
 	ID         int64  `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
 	Type       string `gorm:"column:type;comment:类别" json:"type"`                           // 类别
 	KeyID      string `gorm:"column:key_id;comment:主id" json:"keyId"`                       // 主id
@@ -17,7 +17,7 @@ type User_business struct {
 	DeleteFlag string `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
 }
 
-// TableName User_business's table name
-func (*User_business) TableName() string {
-	return TableNameUser_business
+// TableName UserBusiness's table name
+func (*UserBusiness) TableName() string {
+	return TableNameUserBusiness
 }
