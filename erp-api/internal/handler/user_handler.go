@@ -36,9 +36,23 @@ func (h *UserHandler) Login(c *gin.Context) {
 	var req dto.LoginReq
 	if err := c.ShouldBindJSON(&req); err != nil {
 		slog.Error(err.Error())
-		c.String(500, "错误")
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "用户登录失败",
+		})
 		return
 	}
+
+	// 校验验证码
+	if !util.VerifyCaptcha(req.Uuid, req.Code) {
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "验证码错误",
+		})
+		return
+	}
+
+	// todo 从数据库查询
 
 	c.JSON(200, dto.Success("登录成功"))
 }

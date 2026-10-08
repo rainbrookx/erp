@@ -5,11 +5,11 @@ import (
 	"github.com/rainbrookx/erp/internal/handler"
 )
 
-func InitRouter(router *gin.Engine) {
+func InitRouter(router *gin.RouterGroup) {
 	bindUserGroup(router)
 }
 
-func bindUserGroup(router *gin.Engine) {
+func bindUserGroup(router *gin.RouterGroup) {
 	relativePath := "/user"
 
 	r := router.Group(relativePath)

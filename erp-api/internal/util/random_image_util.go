@@ -55,7 +55,7 @@ func GenerateCaptcha() (id, b64s, answer string, err error) {
 	return
 }
 
-func VerifyCaptcha(id string, answer string) bool {
+func VerifyCaptcha(id, answer string) bool {
 	return captchaStore.Verify(id, answer, true)
 }
 

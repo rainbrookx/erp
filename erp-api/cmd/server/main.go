@@ -10,9 +10,11 @@ import (
 func main() {
 	engine := gin.Default()
 
-	router.InitRouter(engine)
+	group := engine.Group("/jshERP-boot")
 
-	err := engine.Run(":8080")
+	router.InitRouter(group)
+
+	err := engine.Run(":9999")
 	if err != nil {
 		slog.Error(err.Error())
 		return
