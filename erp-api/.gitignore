@@ -33,3 +33,4 @@ go.work.sum
 
 # fys
 config.yaml
+/test/
