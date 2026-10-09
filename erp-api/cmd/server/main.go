@@ -31,5 +31,5 @@ func initMain() {
 
 	database.InitDatabase(config.C.Database)
 	redis_infr.InitRedis(config.C.Redis)
-	util.InitRandomImageUtil()
+	util.InitRandomImageUtil(redis_infr.R)
 }
