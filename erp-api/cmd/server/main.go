@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/rainbrookx/erp/internal/infrastructure/config"
 	"github.com/rainbrookx/erp/internal/infrastructure/database"
+	"github.com/rainbrookx/erp/internal/infrastructure/redis_infr"
 	"github.com/rainbrookx/erp/internal/router"
 	"github.com/rainbrookx/erp/internal/util"
 )
@@ -29,5 +30,6 @@ func initMain() {
 	config.InitConfig()
 
 	database.InitDatabase(config.C.Database)
+	redis_infr.InitRedis(config.C.Redis)
 	util.InitRandomImageUtil()
 }
