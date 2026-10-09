@@ -7,6 +7,7 @@ import (
 
 func InitRouter(router *gin.RouterGroup) {
 	bindUserHandler(router)
+	bindPlatformConfigHandler(router)
 }
 
 // bindUserHandler 用户管理
