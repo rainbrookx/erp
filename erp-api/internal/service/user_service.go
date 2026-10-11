@@ -36,15 +36,15 @@ func Login(ctx *gin.Context, loginName, password string) (*map[string]any, error
 		return nil, err
 	}
 
-	if user.TenantID != 0 {
-		token = token + "_" + strconv.FormatInt(user.TenantID, 10)
+	if user.TenantID != nil {
+		token = token + "_" + strconv.FormatInt(*user.TenantID, 10)
 	}
 
 	// 保存 session
 	util.StorageObjectBySession(ctx, token, "userId", user.ID)
 
 	// 判断密码是否为默认的
-	pwdSimple := strings.EqualFold(util.MD5Crypto("123456"), util.MD5Crypto(user.Password))
+	pwdSimple := strings.EqualFold(util.MD5Crypto("123456"), util.MD5Crypto(*user.Password))
 	// TODO 如果是管理员，则发送登录邮件
 
 	// 组装数据返回
@@ -63,32 +63,32 @@ func validateUser(ctx context.Context, loginName, password string) (msgTip strin
 		return msgTip, nil, errors.New(msgTip)
 	}
 
-	if user.Status != 0 {
+	if *user.Status != 0 {
 		msgTip = "user is black"
 		return msgTip, nil, errors.New(msgTip)
 	}
 
 	// 查询租户信息
-	tenant, err2 := repository.GetTenantByTenantId(ctx, user.TenantID)
+	tenant, err2 := repository.GetTenantByTenantId(ctx, *user.TenantID)
 	if err2 != nil {
 		msgTip = err2.Error()
 		return msgTip, nil, errors.New(msgTip)
 	}
 
 	if tenant != nil {
-		if !bytes.Equal(tenant.Enabled, []byte{1}) {
+		if !bytes.Equal(*tenant.Enabled, []byte{1}) {
 			msgTip = "tenant is black"
 			return msgTip, nil, errors.New(msgTip)
 		}
 
-		if time.Now().After(tenant.ExpireTime) {
+		if time.Now().After(*tenant.ExpireTime) {
 			msgTip = "tenant is expire"
 			return msgTip, nil, errors.New(msgTip)
 		}
 	}
 
 	// 判断账号密码（数据库存储的是前端对密码的MD5）
-	if !strings.EqualFold(password, user.Password) {
+	if !strings.EqualFold(password, *user.Password) {
 		msgTip = "user password error"
 		return msgTip, nil, errors.New(msgTip)
 	}

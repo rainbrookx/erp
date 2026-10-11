@@ -19,7 +19,7 @@ func (h *PlatformConfigHandler) GetPlatformName(c *gin.Context) {
 		return
 	}
 
-	c.String(200, value.PlatformValue)
+	c.String(200, *value.PlatformValue)
 }
 
 // GetPlatformUrl 获取官方网站地址
@@ -31,7 +31,7 @@ func (h *PlatformConfigHandler) GetPlatformUrl(c *gin.Context) {
 		return
 	}
 
-	c.String(200, value.PlatformValue)
+	c.String(200, *value.PlatformValue)
 }
 
 // GetPlatformRegisterFlag 获取是否开启注册
@@ -43,7 +43,7 @@ func (h *PlatformConfigHandler) GetPlatformRegisterFlag(c *gin.Context) {
 		return
 	}
 
-	c.String(200, value.PlatformValue)
+	c.String(200, *value.PlatformValue)
 }
 
 // GetPlatformCheckCodeFlag 获取是否开启验证码
@@ -55,7 +55,7 @@ func (h *PlatformConfigHandler) GetPlatformCheckCodeFlag(c *gin.Context) {
 		return
 	}
 
-	c.String(200, value.PlatformValue)
+	c.String(200, *value.PlatformValue)
 }
 
 // GetPlatformAppVersion 获取APP版本
@@ -67,5 +67,5 @@ func (h *PlatformConfigHandler) GetPlatformAppVersion(c *gin.Context) {
 		return
 	}
 
-	c.String(200, value.PlatformValue)
+	c.String(200, *value.PlatformValue)
 }

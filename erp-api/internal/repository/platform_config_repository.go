@@ -23,7 +23,7 @@ func GetPlatformConfigByKey(ctx context.Context, platformKey string) (*model.Pla
 
 	if err := database.DB.
 		WithContext(ctx).
-		Where(model.PlatformConfig{PlatformKey: platformKey}).
+		Where(model.PlatformConfig{PlatformKey: &platformKey}).
 		First(&m).
 		Error; err != nil {
 		return nil, err
