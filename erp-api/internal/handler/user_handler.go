@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/rainbrookx/erp/internal/dto"
+	"github.com/rainbrookx/erp/internal/service"
 	"github.com/rainbrookx/erp/internal/util"
 )
 
@@ -45,14 +46,21 @@ func (h *UserHandler) Login(c *gin.Context) {
 
 	// 校验验证码
 	if !util.VerifyCaptcha(req.Uuid, req.Code) {
-		c.JSON(500, dto.Response[string]{
+		c.JSON(200, dto.Response[any]{
 			Code: 500,
-			Data: "验证码错误",
+			Data: gin.H{"message": "验证码错误"},
 		})
 		return
 	}
 
 	// todo 从数据库查询
+	loginData, err := service.Login(c, req.LoginName, req.Password)
+	if err != nil {
+		c.JSON(200, dto.Response[any]{
+			Code: 500,
+			Data: gin.H{"message": err.Error()},
+		})
+	}
 
-	c.JSON(200, dto.Success("登录成功"))
+	c.JSON(200, dto.Success(loginData))
 }

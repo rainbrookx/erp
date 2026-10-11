@@ -17,14 +17,11 @@ import (
 const (
 	captchaLength = 4
 	captchaWidth  = 105
-	captchaHeight = 35
+	captchaHeight = 45
 	captchaSource = "123456789abcdefghjkmnpqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
 )
 
 var (
-	// rawDriver 原始的驱动
-	rawDriver *base64Captcha.DriverString
-
 	// captchaDriver 验证码驱动
 	captchaDriver base64Captcha.Driver
 
@@ -39,15 +36,15 @@ func InitRandomImageUtil(rdb *redis.Client) {
 	bgColor := &color.RGBA{R: 200, G: 200, B: 200, A: 200}
 
 	driverString := base64Captcha.DriverString{
-		Length:          captchaLength,
-		Width:           captchaWidth,
-		Height:          captchaHeight,
-		Source:          captchaSource,
-		BgColor:         bgColor,
-		ShowLineOptions: base64Captcha.OptionShowHollowLine | base64Captcha.OptionShowSlimeLine,
+		Length:  captchaLength,
+		Width:   captchaWidth,
+		Height:  captchaHeight,
+		Source:  captchaSource,
+		BgColor: bgColor,
 	}
 
-	rawDriver = driverString.ConvertFonts()
+	// rawDriver 原始的驱动
+	rawDriver := driverString.ConvertFonts()
 	captchaDriver = &CustomUUIDDriver{
 		DriverString: rawDriver,
 	}
@@ -126,7 +123,7 @@ func (s *RedisStore) Get(id string, clear bool) string {
 func (s *RedisStore) Verify(id, answer string, clear bool) bool {
 	// 直接调用 Get 方法，传入 clear 参数
 	storedAnswer := s.Get(id, clear)
-	return storedAnswer == answer
+	return strings.EqualFold(storedAnswer, answer)
 }
 
 // === End RedisStore ===
