@@ -8,10 +8,10 @@ const TableNamePlatformConfig = "jsh_platform_config"
 
 // PlatformConfig 平台参数
 type PlatformConfig struct {
-	ID              int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	PlatformKey     string `gorm:"column:platform_key;comment:关键词" json:"platformKey"`            // 关键词
-	PlatformKeyInfo string `gorm:"column:platform_key_info;comment:关键词名称" json:"platformKeyInfo"` // 关键词名称
-	PlatformValue   string `gorm:"column:platform_value;comment:值" json:"platformValue"`          // 值
+	ID              int64   `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true" json:"id"`
+	PlatformKey     *string `gorm:"column:platform_key;type:varchar(100);comment:关键词" json:"platformKey"`            // 关键词
+	PlatformKeyInfo *string `gorm:"column:platform_key_info;type:varchar(100);comment:关键词名称" json:"platformKeyInfo"` // 关键词名称
+	PlatformValue   *string `gorm:"column:platform_value;type:varchar(200);comment:值" json:"platformValue"`          // 值
 }
 
 // TableName PlatformConfig's table name

@@ -8,14 +8,14 @@ const TableNameInOutItem = "jsh_in_out_item"
 
 // InOutItem 收支项目
 type InOutItem struct {
-	ID         int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
-	Name       string  `gorm:"column:name;comment:名称" json:"name"`                           // 名称
-	Type       string  `gorm:"column:type;comment:类型" json:"type"`                           // 类型
-	Remark     string  `gorm:"column:remark;comment:备注" json:"remark"`                       // 备注
-	Enabled    []uint8 `gorm:"column:enabled;comment:启用" json:"enabled"`                     // 启用
-	Sort       string  `gorm:"column:sort;comment:排序" json:"sort"`                           // 排序
-	TenantID   int64   `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                // 租户id
-	DeleteFlag string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
+	ID         int64    `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`   // 主键
+	Name       *string  `gorm:"column:name;type:varchar(50);comment:名称" json:"name"`                        // 名称
+	Type       *string  `gorm:"column:type;type:varchar(20);comment:类型" json:"type"`                        // 类型
+	Remark     *string  `gorm:"column:remark;type:varchar(100);comment:备注" json:"remark"`                   // 备注
+	Enabled    *[]uint8 `gorm:"column:enabled;type:bit(1);comment:启用" json:"enabled"`                       // 启用
+	Sort       *string  `gorm:"column:sort;type:varchar(10);comment:排序" json:"sort"`                        // 排序
+	TenantID   *int64   `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                  // 租户id
+	DeleteFlag *string  `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
 // TableName InOutItem's table name

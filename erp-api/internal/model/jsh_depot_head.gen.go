@@ -12,41 +12,41 @@ const TableNameDepotHead = "jsh_depot_head"
 
 // DepotHead 单据主表
 type DepotHead struct {
-	ID                int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`               // 主键
-	Type              string    `gorm:"column:type;comment:类型(出库/入库)" json:"type"`                                  // 类型(出库/入库)
-	SubType           string    `gorm:"column:sub_type;comment:出入库分类" json:"subType"`                               // 出入库分类
-	DefaultNumber     string    `gorm:"column:default_number;comment:初始票据号" json:"defaultNumber"`                   // 初始票据号
-	Number            string    `gorm:"column:number;comment:票据号" json:"number"`                                    // 票据号
-	CreateTime        time.Time `gorm:"column:create_time;comment:创建时间" json:"createTime"`                          // 创建时间
-	OperTime          time.Time `gorm:"column:oper_time;comment:出入库时间" json:"operTime"`                             // 出入库时间
-	OrganID           int64     `gorm:"column:organ_id;comment:供应商id" json:"organId"`                               // 供应商id
-	Creator           int64     `gorm:"column:creator;comment:操作员" json:"creator"`                                  // 操作员
-	AccountID         int64     `gorm:"column:account_id;comment:账户id" json:"accountId"`                            // 账户id
-	ChangeAmount      float64   `gorm:"column:change_amount;comment:变动金额(收款/付款)" json:"changeAmount"`               // 变动金额(收款/付款)
-	BackAmount        float64   `gorm:"column:back_amount;comment:找零金额" json:"backAmount"`                          // 找零金额
-	TotalPrice        float64   `gorm:"column:total_price;comment:合计金额" json:"totalPrice"`                          // 合计金额
-	PayType           string    `gorm:"column:pay_type;comment:付款类型(现金、记账等)" json:"payType"`                        // 付款类型(现金、记账等)
-	BillType          string    `gorm:"column:bill_type;comment:单据类型" json:"billType"`                              // 单据类型
-	Remark            string    `gorm:"column:remark;comment:备注" json:"remark"`                                     // 备注
-	FileName          string    `gorm:"column:file_name;comment:附件名称" json:"fileName"`                              // 附件名称
-	SalesMan          string    `gorm:"column:sales_man;comment:销售员（可以多个）" json:"salesMan"`                         // 销售员（可以多个）
-	AccountIDList     string    `gorm:"column:account_id_list;comment:多账户ID列表" json:"accountIdList"`                // 多账户ID列表
-	AccountMoneyList  string    `gorm:"column:account_money_list;comment:多账户金额列表" json:"accountMoneyList"`          // 多账户金额列表
-	Discount          float64   `gorm:"column:discount;comment:优惠率" json:"discount"`                                // 优惠率
-	DiscountMoney     float64   `gorm:"column:discount_money;comment:优惠金额" json:"discountMoney"`                    // 优惠金额
-	DiscountLastMoney float64   `gorm:"column:discount_last_money;comment:优惠后金额" json:"discountLastMoney"`          // 优惠后金额
-	OtherMoney        float64   `gorm:"column:other_money;comment:销售或采购费用合计" json:"otherMoney"`                     // 销售或采购费用合计
-	Deposit           float64   `gorm:"column:deposit;comment:订金" json:"deposit"`                                   // 订金
-	LastDeposit       float64   `gorm:"column:last_deposit;comment:剩余订金" json:"lastDeposit"`                        // 剩余订金
-	Debt              float64   `gorm:"column:debt;comment:本次欠款" json:"debt"`                                       // 本次欠款
-	LastDebt          float64   `gorm:"column:last_debt;comment:最终欠款" json:"lastDebt"`                              // 最终欠款
-	Status            string    `gorm:"column:status;comment:状态，0未审核、1已审核、2完成采购|销售、3部分采购|销售、9审核中" json:"status"`    // 状态，0未审核、1已审核、2完成采购|销售、3部分采购|销售、9审核中
-	PurchaseStatus    string    `gorm:"column:purchase_status;comment:采购状态，0未采购、2完成采购、3部分采购" json:"purchaseStatus"` // 采购状态，0未采购、2完成采购、3部分采购
-	Source            string    `gorm:"column:source;comment:单据来源，0-pc，1-手机" json:"source"`                         // 单据来源，0-pc，1-手机
-	LinkNumber        string    `gorm:"column:link_number;comment:关联订单号" json:"linkNumber"`                         // 关联订单号
-	LinkApply         string    `gorm:"column:link_apply;comment:关联请购单" json:"linkApply"`                           // 关联请购单
-	TenantID          int64     `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                              // 租户id
-	DeleteFlag        string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`                 // 删除标记，0未删除，1删除
+	ID                int64      `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`                   // 主键
+	Type              *string    `gorm:"column:type;type:varchar(50);comment:类型(出库/入库)" json:"type"`                                 // 类型(出库/入库)
+	SubType           *string    `gorm:"column:sub_type;type:varchar(50);comment:出入库分类" json:"subType"`                              // 出入库分类
+	DefaultNumber     *string    `gorm:"column:default_number;type:varchar(50);comment:初始票据号" json:"defaultNumber"`                  // 初始票据号
+	Number            *string    `gorm:"column:number;type:varchar(50);comment:票据号" json:"number"`                                   // 票据号
+	CreateTime        *time.Time `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`                            // 创建时间
+	OperTime          *time.Time `gorm:"column:oper_time;type:datetime;comment:出入库时间" json:"operTime"`                               // 出入库时间
+	OrganID           *int64     `gorm:"column:organ_id;type:bigint;comment:供应商id" json:"organId"`                                   // 供应商id
+	Creator           *int64     `gorm:"column:creator;type:bigint;comment:操作员" json:"creator"`                                      // 操作员
+	AccountID         *int64     `gorm:"column:account_id;type:bigint;comment:账户id" json:"accountId"`                                // 账户id
+	ChangeAmount      *float64   `gorm:"column:change_amount;type:decimal(24,6);comment:变动金额(收款/付款)" json:"changeAmount"`            // 变动金额(收款/付款)
+	BackAmount        *float64   `gorm:"column:back_amount;type:decimal(24,6);comment:找零金额" json:"backAmount"`                       // 找零金额
+	TotalPrice        *float64   `gorm:"column:total_price;type:decimal(24,6);comment:合计金额" json:"totalPrice"`                       // 合计金额
+	PayType           *string    `gorm:"column:pay_type;type:varchar(50);comment:付款类型(现金、记账等)" json:"payType"`                       // 付款类型(现金、记账等)
+	BillType          *string    `gorm:"column:bill_type;type:varchar(50);comment:单据类型" json:"billType"`                             // 单据类型
+	Remark            *string    `gorm:"column:remark;type:varchar(1000);comment:备注" json:"remark"`                                  // 备注
+	FileName          *string    `gorm:"column:file_name;type:varchar(1000);comment:附件名称" json:"fileName"`                           // 附件名称
+	SalesMan          *string    `gorm:"column:sales_man;type:varchar(50);comment:销售员（可以多个）" json:"salesMan"`                        // 销售员（可以多个）
+	AccountIDList     *string    `gorm:"column:account_id_list;type:varchar(50);comment:多账户ID列表" json:"accountIdList"`               // 多账户ID列表
+	AccountMoneyList  *string    `gorm:"column:account_money_list;type:varchar(200);comment:多账户金额列表" json:"accountMoneyList"`        // 多账户金额列表
+	Discount          *float64   `gorm:"column:discount;type:decimal(24,6);comment:优惠率" json:"discount"`                             // 优惠率
+	DiscountMoney     *float64   `gorm:"column:discount_money;type:decimal(24,6);comment:优惠金额" json:"discountMoney"`                 // 优惠金额
+	DiscountLastMoney *float64   `gorm:"column:discount_last_money;type:decimal(24,6);comment:优惠后金额" json:"discountLastMoney"`       // 优惠后金额
+	OtherMoney        *float64   `gorm:"column:other_money;type:decimal(24,6);comment:销售或采购费用合计" json:"otherMoney"`                  // 销售或采购费用合计
+	Deposit           *float64   `gorm:"column:deposit;type:decimal(24,6);comment:订金" json:"deposit"`                                // 订金
+	LastDeposit       *float64   `gorm:"column:last_deposit;type:decimal(24,6);comment:剩余订金" json:"lastDeposit"`                     // 剩余订金
+	Debt              *float64   `gorm:"column:debt;type:decimal(24,6);comment:本次欠款" json:"debt"`                                    // 本次欠款
+	LastDebt          *float64   `gorm:"column:last_debt;type:decimal(24,6);comment:最终欠款" json:"lastDebt"`                           // 最终欠款
+	Status            *string    `gorm:"column:status;type:varchar(1);comment:状态，0未审核、1已审核、2完成采购|销售、3部分采购|销售、9审核中" json:"status"`    // 状态，0未审核、1已审核、2完成采购|销售、3部分采购|销售、9审核中
+	PurchaseStatus    *string    `gorm:"column:purchase_status;type:varchar(1);comment:采购状态，0未采购、2完成采购、3部分采购" json:"purchaseStatus"` // 采购状态，0未采购、2完成采购、3部分采购
+	Source            *string    `gorm:"column:source;type:varchar(1);comment:单据来源，0-pc，1-手机" json:"source"`                         // 单据来源，0-pc，1-手机
+	LinkNumber        *string    `gorm:"column:link_number;type:varchar(50);comment:关联订单号" json:"linkNumber"`                        // 关联订单号
+	LinkApply         *string    `gorm:"column:link_apply;type:varchar(50);comment:关联请购单" json:"linkApply"`                          // 关联请购单
+	TenantID          *int64     `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                                  // 租户id
+	DeleteFlag        *string    `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`                 // 删除标记，0未删除，1删除
 }
 
 // TableName DepotHead's table name

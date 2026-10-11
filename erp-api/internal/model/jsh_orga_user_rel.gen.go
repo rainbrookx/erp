@@ -12,16 +12,16 @@ const TableNameOrgaUserRel = "jsh_orga_user_rel"
 
 // OrgaUserRel 部门用户关系表
 type OrgaUserRel struct {
-	ID                  int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`                   // 主键
-	OrgaID              int64     `gorm:"column:orga_id;comment:部门id" json:"orgaId"`                                      // 部门id
-	UserID              int64     `gorm:"column:user_id;not null;comment:用户id" json:"userId"`                             // 用户id
-	UserBlngOrgaDsplSeq string    `gorm:"column:user_blng_orga_dspl_seq;comment:用户在所属部门中显示顺序" json:"userBlngOrgaDsplSeq"` // 用户在所属部门中显示顺序
-	DeleteFlag          string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`                     // 删除标记，0未删除，1删除
-	CreateTime          time.Time `gorm:"column:create_time;comment:创建时间" json:"createTime"`                              // 创建时间
-	Creator             int64     `gorm:"column:creator;comment:创建人" json:"creator"`                                      // 创建人
-	UpdateTime          time.Time `gorm:"column:update_time;comment:更新时间" json:"updateTime"`                              // 更新时间
-	Updater             int64     `gorm:"column:updater;comment:更新人" json:"updater"`                                      // 更新人
-	TenantID            int64     `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                                  // 租户id
+	ID                  int64      `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`                        // 主键
+	OrgaID              *int64     `gorm:"column:orga_id;type:bigint;comment:部门id" json:"orgaId"`                                           // 部门id
+	UserID              int64      `gorm:"column:user_id;type:bigint;not null;comment:用户id" json:"userId"`                                  // 用户id
+	UserBlngOrgaDsplSeq *string    `gorm:"column:user_blng_orga_dspl_seq;type:varchar(20);comment:用户在所属部门中显示顺序" json:"userBlngOrgaDsplSeq"` // 用户在所属部门中显示顺序
+	DeleteFlag          *string    `gorm:"column:delete_flag;type:char(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`                         // 删除标记，0未删除，1删除
+	CreateTime          *time.Time `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`                                 // 创建时间
+	Creator             *int64     `gorm:"column:creator;type:bigint;comment:创建人" json:"creator"`                                           // 创建人
+	UpdateTime          *time.Time `gorm:"column:update_time;type:datetime;comment:更新时间" json:"updateTime"`                                 // 更新时间
+	Updater             *int64     `gorm:"column:updater;type:bigint;comment:更新人" json:"updater"`                                           // 更新人
+	TenantID            *int64     `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                                       // 租户id
 }
 
 // TableName OrgaUserRel's table name

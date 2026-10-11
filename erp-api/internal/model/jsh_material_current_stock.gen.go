@@ -8,13 +8,13 @@ const TableNameMaterialCurrentStock = "jsh_material_current_stock"
 
 // MaterialCurrentStock 产品当前库存
 type MaterialCurrentStock struct {
-	ID               int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`   // 主键
-	MaterialID       int64   `gorm:"column:material_id;comment:产品id" json:"materialId"`              // 产品id
-	DepotID          int64   `gorm:"column:depot_id;comment:仓库id" json:"depotId"`                    // 仓库id
-	CurrentNumber    float64 `gorm:"column:current_number;comment:当前库存数量" json:"currentNumber"`      // 当前库存数量
-	CurrentUnitPrice float64 `gorm:"column:current_unit_price;comment:当前单价" json:"currentUnitPrice"` // 当前单价
-	TenantID         int64   `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                  // 租户id
-	DeleteFlag       string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`     // 删除标记，0未删除，1删除
+	ID               int64    `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`          // 主键
+	MaterialID       *int64   `gorm:"column:material_id;type:bigint;comment:产品id" json:"materialId"`                     // 产品id
+	DepotID          *int64   `gorm:"column:depot_id;type:bigint;comment:仓库id" json:"depotId"`                           // 仓库id
+	CurrentNumber    *float64 `gorm:"column:current_number;type:decimal(24,6);comment:当前库存数量" json:"currentNumber"`      // 当前库存数量
+	CurrentUnitPrice *float64 `gorm:"column:current_unit_price;type:decimal(24,6);comment:当前单价" json:"currentUnitPrice"` // 当前单价
+	TenantID         *int64   `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                         // 租户id
+	DeleteFlag       *string  `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`        // 删除标记，0未删除，1删除
 }
 
 // TableName MaterialCurrentStock's table name

@@ -12,14 +12,14 @@ const TableNameLog = "jsh_log"
 
 // Log 操作日志
 type Log struct {
-	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
-	UserID     int64     `gorm:"column:user_id;comment:用户id" json:"userId"`                    // 用户id
-	Operation  string    `gorm:"column:operation;comment:操作模块名称" json:"operation"`             // 操作模块名称
-	ClientIP   string    `gorm:"column:client_ip;comment:客户端IP" json:"clientIp"`               // 客户端IP
-	CreateTime time.Time `gorm:"column:create_time;comment:创建时间" json:"createTime"`            // 创建时间
-	Status     int32     `gorm:"column:status;comment:操作状态 0==成功，1==失败" json:"status"`         // 操作状态 0==成功，1==失败
-	Content    string    `gorm:"column:content;comment:详情" json:"content"`                     // 详情
-	TenantID   int64     `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                // 租户id
+	ID         int64      `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
+	UserID     *int64     `gorm:"column:user_id;type:bigint;comment:用户id" json:"userId"`                    // 用户id
+	Operation  *string    `gorm:"column:operation;type:varchar(500);comment:操作模块名称" json:"operation"`       // 操作模块名称
+	ClientIP   *string    `gorm:"column:client_ip;type:varchar(200);comment:客户端IP" json:"clientIp"`         // 客户端IP
+	CreateTime *time.Time `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`          // 创建时间
+	Status     *int32     `gorm:"column:status;type:tinyint;comment:操作状态 0==成功，1==失败" json:"status"`        // 操作状态 0==成功，1==失败
+	Content    *string    `gorm:"column:content;type:varchar(5000);comment:详情" json:"content"`              // 详情
+	TenantID   *int64     `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                // 租户id
 }
 
 // TableName Log's table name

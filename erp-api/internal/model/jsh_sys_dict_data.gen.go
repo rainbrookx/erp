@@ -12,21 +12,21 @@ const TableNameSysDictData = "jsh_sys_dict_data"
 
 // SysDictData 字典数据表
 type SysDictData struct {
-	DictCode   int64     `gorm:"column:dict_code;primaryKey;autoIncrement:true;comment:字典编码" json:"dictCode"` // 字典编码
-	DictSort   int32     `gorm:"column:dict_sort;comment:字典排序" json:"dictSort"`                               // 字典排序
-	DictLabel  string    `gorm:"column:dict_label;comment:字典标签" json:"dictLabel"`                             // 字典标签
-	DictValue  string    `gorm:"column:dict_value;comment:字典键值" json:"dictValue"`                             // 字典键值
-	DictType   string    `gorm:"column:dict_type;comment:字典类型" json:"dictType"`                               // 字典类型
-	CSSClass   string    `gorm:"column:css_class;comment:样式属性（其他样式扩展）" json:"cssClass"`                       // 样式属性（其他样式扩展）
-	ListClass  string    `gorm:"column:list_class;comment:表格回显样式" json:"listClass"`                           // 表格回显样式
-	IsDefault  string    `gorm:"column:is_default;default:N;comment:是否默认（Y是 N否）" json:"isDefault"`            // 是否默认（Y是 N否）
-	Status     string    `gorm:"column:status;comment:状态（0正常 1停用）" json:"status"`                             // 状态（0正常 1停用）
-	CreateBy   string    `gorm:"column:create_by;comment:创建者" json:"createBy"`                                // 创建者
-	CreateTime time.Time `gorm:"column:create_time;comment:创建时间" json:"createTime"`                           // 创建时间
-	UpdateBy   string    `gorm:"column:update_by;comment:更新者" json:"updateBy"`                                // 更新者
-	UpdateTime time.Time `gorm:"column:update_time;comment:更新时间" json:"updateTime"`                           // 更新时间
-	Remark     string    `gorm:"column:remark;comment:备注" json:"remark"`                                      // 备注
-	DeleteFlag string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`                  // 删除标记，0未删除，1删除
+	DictCode   int64      `gorm:"column:dict_code;type:bigint;primaryKey;autoIncrement:true;comment:字典编码" json:"dictCode"` // 字典编码
+	DictSort   *int32     `gorm:"column:dict_sort;type:int;comment:字典排序" json:"dictSort"`                                  // 字典排序
+	DictLabel  *string    `gorm:"column:dict_label;type:varchar(100);comment:字典标签" json:"dictLabel"`                       // 字典标签
+	DictValue  *string    `gorm:"column:dict_value;type:varchar(100);comment:字典键值" json:"dictValue"`                       // 字典键值
+	DictType   *string    `gorm:"column:dict_type;type:varchar(100);comment:字典类型" json:"dictType"`                         // 字典类型
+	CSSClass   *string    `gorm:"column:css_class;type:varchar(100);comment:样式属性（其他样式扩展）" json:"cssClass"`                 // 样式属性（其他样式扩展）
+	ListClass  *string    `gorm:"column:list_class;type:varchar(100);comment:表格回显样式" json:"listClass"`                     // 表格回显样式
+	IsDefault  *string    `gorm:"column:is_default;type:char(1);default:N;comment:是否默认（Y是 N否）" json:"isDefault"`           // 是否默认（Y是 N否）
+	Status     *string    `gorm:"column:status;type:char(1);comment:状态（0正常 1停用）" json:"status"`                            // 状态（0正常 1停用）
+	CreateBy   *string    `gorm:"column:create_by;type:varchar(64);comment:创建者" json:"createBy"`                           // 创建者
+	CreateTime *time.Time `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`                         // 创建时间
+	UpdateBy   *string    `gorm:"column:update_by;type:varchar(64);comment:更新者" json:"updateBy"`                           // 更新者
+	UpdateTime *time.Time `gorm:"column:update_time;type:datetime;comment:更新时间" json:"updateTime"`                         // 更新时间
+	Remark     *string    `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`                                // 备注
+	DeleteFlag *string    `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`              // 删除标记，0未删除，1删除
 }
 
 // TableName SysDictData's table name

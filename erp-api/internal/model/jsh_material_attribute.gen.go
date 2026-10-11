@@ -8,11 +8,11 @@ const TableNameMaterialAttribute = "jsh_material_attribute"
 
 // MaterialAttribute 产品属性表
 type MaterialAttribute struct {
-	ID             int64  `gorm:"column:id;primaryKey;autoIncrement:true" json:"id"`
-	AttributeName  string `gorm:"column:attribute_name;comment:属性名" json:"attributeName"`     // 属性名
-	AttributeValue string `gorm:"column:attribute_value;comment:属性值" json:"attributeValue"`   // 属性值
-	TenantID       int64  `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`              // 租户id
-	DeleteFlag     string `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
+	ID             int64   `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true" json:"id"`
+	AttributeName  *string `gorm:"column:attribute_name;type:varchar(50);comment:属性名" json:"attributeName"`    // 属性名
+	AttributeValue *string `gorm:"column:attribute_value;type:varchar(500);comment:属性值" json:"attributeValue"` // 属性值
+	TenantID       *int64  `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                  // 租户id
+	DeleteFlag     *string `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
 // TableName MaterialAttribute's table name

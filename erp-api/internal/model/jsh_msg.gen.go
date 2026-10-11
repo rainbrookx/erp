@@ -12,15 +12,15 @@ const TableNameMsg = "jsh_msg"
 
 // Msg 消息表
 type Msg struct {
-	ID         int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
-	MsgTitle   string    `gorm:"column:msg_title;comment:消息标题" json:"msgTitle"`                // 消息标题
-	MsgContent string    `gorm:"column:msg_content;comment:消息内容" json:"msgContent"`            // 消息内容
-	CreateTime time.Time `gorm:"column:create_time;comment:创建时间" json:"createTime"`            // 创建时间
-	Type       string    `gorm:"column:type;comment:消息类型" json:"type"`                         // 消息类型
-	UserID     int64     `gorm:"column:user_id;comment:接收人id" json:"userId"`                   // 接收人id
-	Status     string    `gorm:"column:status;comment:状态，1未读 2已读" json:"status"`               // 状态，1未读 2已读
-	TenantID   int64     `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                // 租户id
-	DeleteFlag string    `gorm:"column:delete_Flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
+	ID         int64      `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`   // 主键
+	MsgTitle   *string    `gorm:"column:msg_title;type:varchar(100);comment:消息标题" json:"msgTitle"`            // 消息标题
+	MsgContent *string    `gorm:"column:msg_content;type:varchar(500);comment:消息内容" json:"msgContent"`        // 消息内容
+	CreateTime *time.Time `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`            // 创建时间
+	Type       *string    `gorm:"column:type;type:varchar(20);comment:消息类型" json:"type"`                      // 消息类型
+	UserID     *int64     `gorm:"column:user_id;type:bigint;comment:接收人id" json:"userId"`                     // 接收人id
+	Status     *string    `gorm:"column:status;type:varchar(1);comment:状态，1未读 2已读" json:"status"`             // 状态，1未读 2已读
+	TenantID   *int64     `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                  // 租户id
+	DeleteFlag *string    `gorm:"column:delete_Flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
 // TableName Msg's table name

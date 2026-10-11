@@ -8,13 +8,13 @@ const TableNameUserBusiness = "jsh_user_business"
 
 // UserBusiness 用户/角色/模块关系表
 type UserBusiness struct {
-	ID         int64  `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
-	Type       string `gorm:"column:type;comment:类别" json:"type"`                           // 类别
-	KeyID      string `gorm:"column:key_id;comment:主id" json:"keyId"`                       // 主id
-	Value      string `gorm:"column:value;comment:值" json:"value"`                          // 值
-	BtnStr     string `gorm:"column:btn_str;comment:按钮权限" json:"btnStr"`                    // 按钮权限
-	TenantID   int64  `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                // 租户id
-	DeleteFlag string `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
+	ID         int64   `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`   // 主键
+	Type       *string `gorm:"column:type;type:varchar(50);comment:类别" json:"type"`                        // 类别
+	KeyID      *string `gorm:"column:key_id;type:varchar(50);comment:主id" json:"keyId"`                    // 主id
+	Value      *string `gorm:"column:value;type:text;comment:值" json:"value"`                              // 值
+	BtnStr     *string `gorm:"column:btn_str;type:varchar(20000);comment:按钮权限" json:"btnStr"`              // 按钮权限
+	TenantID   *int64  `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                  // 租户id
+	DeleteFlag *string `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
 // TableName UserBusiness's table name

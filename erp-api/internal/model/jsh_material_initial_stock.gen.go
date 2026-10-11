@@ -8,14 +8,14 @@ const TableNameMaterialInitialStock = "jsh_material_initial_stock"
 
 // MaterialInitialStock 产品初始库存
 type MaterialInitialStock struct {
-	ID            int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
-	MaterialID    int64   `gorm:"column:material_id;comment:产品id" json:"materialId"`            // 产品id
-	DepotID       int64   `gorm:"column:depot_id;comment:仓库id" json:"depotId"`                  // 仓库id
-	Number        float64 `gorm:"column:number;comment:初始库存数量" json:"number"`                   // 初始库存数量
-	LowSafeStock  float64 `gorm:"column:low_safe_stock;comment:最低库存数量" json:"lowSafeStock"`     // 最低库存数量
-	HighSafeStock float64 `gorm:"column:high_safe_stock;comment:最高库存数量" json:"highSafeStock"`   // 最高库存数量
-	TenantID      int64   `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                // 租户id
-	DeleteFlag    string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
+	ID            int64    `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`      // 主键
+	MaterialID    *int64   `gorm:"column:material_id;type:bigint;comment:产品id" json:"materialId"`                 // 产品id
+	DepotID       *int64   `gorm:"column:depot_id;type:bigint;comment:仓库id" json:"depotId"`                       // 仓库id
+	Number        *float64 `gorm:"column:number;type:decimal(24,6);comment:初始库存数量" json:"number"`                 // 初始库存数量
+	LowSafeStock  *float64 `gorm:"column:low_safe_stock;type:decimal(24,6);comment:最低库存数量" json:"lowSafeStock"`   // 最低库存数量
+	HighSafeStock *float64 `gorm:"column:high_safe_stock;type:decimal(24,6);comment:最高库存数量" json:"highSafeStock"` // 最高库存数量
+	TenantID      *int64   `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                     // 租户id
+	DeleteFlag    *string  `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`    // 删除标记，0未删除，1删除
 }
 
 // TableName MaterialInitialStock's table name

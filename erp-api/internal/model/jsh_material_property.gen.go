@@ -8,13 +8,13 @@ const TableNameMaterialProperty = "jsh_material_property"
 
 // MaterialProperty 产品扩展字段表
 type MaterialProperty struct {
-	ID          int64   `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
-	NativeName  string  `gorm:"column:native_name;comment:原始名称" json:"nativeName"`            // 原始名称
-	Enabled     []uint8 `gorm:"column:enabled;comment:是否启用" json:"enabled"`                   // 是否启用
-	Sort        string  `gorm:"column:sort;comment:排序" json:"sort"`                           // 排序
-	AnotherName string  `gorm:"column:another_name;comment:别名" json:"anotherName"`            // 别名
-	TenantID    int64   `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                // 租户id
-	DeleteFlag  string  `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
+	ID          int64    `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`   // 主键
+	NativeName  *string  `gorm:"column:native_name;type:varchar(50);comment:原始名称" json:"nativeName"`         // 原始名称
+	Enabled     *[]uint8 `gorm:"column:enabled;type:bit(1);comment:是否启用" json:"enabled"`                     // 是否启用
+	Sort        *string  `gorm:"column:sort;type:varchar(10);comment:排序" json:"sort"`                        // 排序
+	AnotherName *string  `gorm:"column:another_name;type:varchar(50);comment:别名" json:"anotherName"`         // 别名
+	TenantID    *int64   `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                  // 租户id
+	DeleteFlag  *string  `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
 // TableName MaterialProperty's table name

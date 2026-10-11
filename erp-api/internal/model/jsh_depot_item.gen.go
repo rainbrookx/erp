@@ -12,31 +12,31 @@ const TableNameDepotItem = "jsh_depot_item"
 
 // DepotItem 单据子表
 type DepotItem struct {
-	ID                int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"`     // 主键
-	HeaderID          int64     `gorm:"column:header_id;not null;comment:表头Id" json:"headerId"`           // 表头Id
-	MaterialID        int64     `gorm:"column:material_id;not null;comment:商品Id" json:"materialId"`       // 商品Id
-	MaterialExtendID  int64     `gorm:"column:material_extend_id;comment:商品扩展id" json:"materialExtendId"` // 商品扩展id
-	MaterialUnit      string    `gorm:"column:material_unit;comment:商品单位" json:"materialUnit"`            // 商品单位
-	Sku               string    `gorm:"column:sku;comment:多属性" json:"sku"`                                // 多属性
-	OperNumber        float64   `gorm:"column:oper_number;comment:数量" json:"operNumber"`                  // 数量
-	BasicNumber       float64   `gorm:"column:basic_number;comment:基础数量，如kg、瓶" json:"basicNumber"`        // 基础数量，如kg、瓶
-	UnitPrice         float64   `gorm:"column:unit_price;comment:单价" json:"unitPrice"`                    // 单价
-	PurchaseUnitPrice float64   `gorm:"column:purchase_unit_price;comment:采购单价" json:"purchaseUnitPrice"` // 采购单价
-	TaxUnitPrice      float64   `gorm:"column:tax_unit_price;comment:含税单价" json:"taxUnitPrice"`           // 含税单价
-	AllPrice          float64   `gorm:"column:all_price;comment:金额" json:"allPrice"`                      // 金额
-	Remark            string    `gorm:"column:remark;comment:备注" json:"remark"`                           // 备注
-	DepotID           int64     `gorm:"column:depot_id;comment:仓库ID" json:"depotId"`                      // 仓库ID
-	AnotherDepotID    int64     `gorm:"column:another_depot_id;comment:调拨时，对方仓库Id" json:"anotherDepotId"` // 调拨时，对方仓库Id
-	TaxRate           float64   `gorm:"column:tax_rate;comment:税率" json:"taxRate"`                        // 税率
-	TaxMoney          float64   `gorm:"column:tax_money;comment:税额" json:"taxMoney"`                      // 税额
-	TaxLastMoney      float64   `gorm:"column:tax_last_money;comment:价税合计" json:"taxLastMoney"`           // 价税合计
-	MaterialType      string    `gorm:"column:material_type;comment:商品类型" json:"materialType"`            // 商品类型
-	SnList            string    `gorm:"column:sn_list;comment:序列号列表" json:"snList"`                       // 序列号列表
-	BatchNumber       string    `gorm:"column:batch_number;comment:批号" json:"batchNumber"`                // 批号
-	ExpirationDate    time.Time `gorm:"column:expiration_date;comment:有效日期" json:"expirationDate"`        // 有效日期
-	LinkID            int64     `gorm:"column:link_id;comment:关联明细id" json:"linkId"`                      // 关联明细id
-	TenantID          int64     `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                    // 租户id
-	DeleteFlag        string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`       // 删除标记，0未删除，1删除
+	ID                int64      `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`            // 主键
+	HeaderID          int64      `gorm:"column:header_id;type:bigint;not null;comment:表头Id" json:"headerId"`                  // 表头Id
+	MaterialID        int64      `gorm:"column:material_id;type:bigint;not null;comment:商品Id" json:"materialId"`              // 商品Id
+	MaterialExtendID  *int64     `gorm:"column:material_extend_id;type:bigint;comment:商品扩展id" json:"materialExtendId"`        // 商品扩展id
+	MaterialUnit      *string    `gorm:"column:material_unit;type:varchar(20);comment:商品单位" json:"materialUnit"`              // 商品单位
+	Sku               *string    `gorm:"column:sku;type:varchar(50);comment:多属性" json:"sku"`                                  // 多属性
+	OperNumber        *float64   `gorm:"column:oper_number;type:decimal(24,6);comment:数量" json:"operNumber"`                  // 数量
+	BasicNumber       *float64   `gorm:"column:basic_number;type:decimal(24,6);comment:基础数量，如kg、瓶" json:"basicNumber"`        // 基础数量，如kg、瓶
+	UnitPrice         *float64   `gorm:"column:unit_price;type:decimal(24,6);comment:单价" json:"unitPrice"`                    // 单价
+	PurchaseUnitPrice *float64   `gorm:"column:purchase_unit_price;type:decimal(24,6);comment:采购单价" json:"purchaseUnitPrice"` // 采购单价
+	TaxUnitPrice      *float64   `gorm:"column:tax_unit_price;type:decimal(24,6);comment:含税单价" json:"taxUnitPrice"`           // 含税单价
+	AllPrice          *float64   `gorm:"column:all_price;type:decimal(24,6);comment:金额" json:"allPrice"`                      // 金额
+	Remark            *string    `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`                            // 备注
+	DepotID           *int64     `gorm:"column:depot_id;type:bigint;comment:仓库ID" json:"depotId"`                             // 仓库ID
+	AnotherDepotID    *int64     `gorm:"column:another_depot_id;type:bigint;comment:调拨时，对方仓库Id" json:"anotherDepotId"`        // 调拨时，对方仓库Id
+	TaxRate           *float64   `gorm:"column:tax_rate;type:decimal(24,6);comment:税率" json:"taxRate"`                        // 税率
+	TaxMoney          *float64   `gorm:"column:tax_money;type:decimal(24,6);comment:税额" json:"taxMoney"`                      // 税额
+	TaxLastMoney      *float64   `gorm:"column:tax_last_money;type:decimal(24,6);comment:价税合计" json:"taxLastMoney"`           // 价税合计
+	MaterialType      *string    `gorm:"column:material_type;type:varchar(20);comment:商品类型" json:"materialType"`              // 商品类型
+	SnList            *string    `gorm:"column:sn_list;type:varchar(2000);comment:序列号列表" json:"snList"`                       // 序列号列表
+	BatchNumber       *string    `gorm:"column:batch_number;type:varchar(100);comment:批号" json:"batchNumber"`                 // 批号
+	ExpirationDate    *time.Time `gorm:"column:expiration_date;type:datetime;comment:有效日期" json:"expirationDate"`             // 有效日期
+	LinkID            *int64     `gorm:"column:link_id;type:bigint;comment:关联明细id" json:"linkId"`                             // 关联明细id
+	TenantID          *int64     `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                           // 租户id
+	DeleteFlag        *string    `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`          // 删除标记，0未删除，1删除
 }
 
 // TableName DepotItem's table name

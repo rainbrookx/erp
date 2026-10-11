@@ -12,16 +12,16 @@ const TableNameSysDictType = "jsh_sys_dict_type"
 
 // SysDictType 字典类型表
 type SysDictType struct {
-	DictID     int64     `gorm:"column:dict_id;primaryKey;autoIncrement:true;comment:字典主键" json:"dictId"` // 字典主键
-	DictName   string    `gorm:"column:dict_name;comment:字典名称" json:"dictName"`                           // 字典名称
-	DictType   string    `gorm:"column:dict_type;comment:字典类型" json:"dictType"`                           // 字典类型
-	Status     string    `gorm:"column:status;comment:状态（0正常 1停用）" json:"status"`                         // 状态（0正常 1停用）
-	CreateBy   string    `gorm:"column:create_by;comment:创建者" json:"createBy"`                            // 创建者
-	CreateTime time.Time `gorm:"column:create_time;comment:创建时间" json:"createTime"`                       // 创建时间
-	UpdateBy   string    `gorm:"column:update_by;comment:更新者" json:"updateBy"`                            // 更新者
-	UpdateTime time.Time `gorm:"column:update_time;comment:更新时间" json:"updateTime"`                       // 更新时间
-	Remark     string    `gorm:"column:remark;comment:备注" json:"remark"`                                  // 备注
-	DeleteFlag string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`              // 删除标记，0未删除，1删除
+	DictID     int64      `gorm:"column:dict_id;type:bigint;primaryKey;autoIncrement:true;comment:字典主键" json:"dictId"` // 字典主键
+	DictName   *string    `gorm:"column:dict_name;type:varchar(100);comment:字典名称" json:"dictName"`                     // 字典名称
+	DictType   *string    `gorm:"column:dict_type;type:varchar(100);comment:字典类型" json:"dictType"`                     // 字典类型
+	Status     *string    `gorm:"column:status;type:char(1);comment:状态（0正常 1停用）" json:"status"`                        // 状态（0正常 1停用）
+	CreateBy   *string    `gorm:"column:create_by;type:varchar(64);comment:创建者" json:"createBy"`                       // 创建者
+	CreateTime *time.Time `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`                     // 创建时间
+	UpdateBy   *string    `gorm:"column:update_by;type:varchar(64);comment:更新者" json:"updateBy"`                       // 更新者
+	UpdateTime *time.Time `gorm:"column:update_time;type:datetime;comment:更新时间" json:"updateTime"`                     // 更新时间
+	Remark     *string    `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`                            // 备注
+	DeleteFlag *string    `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`          // 删除标记，0未删除，1删除
 }
 
 // TableName SysDictType's table name

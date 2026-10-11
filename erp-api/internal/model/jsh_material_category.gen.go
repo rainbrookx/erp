@@ -12,17 +12,17 @@ const TableNameMaterialCategory = "jsh_material_category"
 
 // MaterialCategory 产品类型表
 type MaterialCategory struct {
-	ID            int64     `gorm:"column:id;primaryKey;autoIncrement:true;comment:主键" json:"id"` // 主键
-	Name          string    `gorm:"column:name;comment:名称" json:"name"`                           // 名称
-	CategoryLevel int32     `gorm:"column:category_level;comment:等级" json:"categoryLevel"`        // 等级
-	ParentID      int64     `gorm:"column:parent_id;comment:上级id" json:"parentId"`                // 上级id
-	Sort          string    `gorm:"column:sort;comment:显示顺序" json:"sort"`                         // 显示顺序
-	SerialNo      string    `gorm:"column:serial_no;comment:编号" json:"serialNo"`                  // 编号
-	Remark        string    `gorm:"column:remark;comment:备注" json:"remark"`                       // 备注
-	CreateTime    time.Time `gorm:"column:create_time;comment:创建时间" json:"createTime"`            // 创建时间
-	UpdateTime    time.Time `gorm:"column:update_time;comment:更新时间" json:"updateTime"`            // 更新时间
-	TenantID      int64     `gorm:"column:tenant_id;comment:租户id" json:"tenantId"`                // 租户id
-	DeleteFlag    string    `gorm:"column:delete_flag;comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
+	ID            int64      `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`   // 主键
+	Name          *string    `gorm:"column:name;type:varchar(50);comment:名称" json:"name"`                        // 名称
+	CategoryLevel *int32     `gorm:"column:category_level;type:smallint;comment:等级" json:"categoryLevel"`        // 等级
+	ParentID      *int64     `gorm:"column:parent_id;type:bigint;comment:上级id" json:"parentId"`                  // 上级id
+	Sort          *string    `gorm:"column:sort;type:varchar(10);comment:显示顺序" json:"sort"`                      // 显示顺序
+	SerialNo      *string    `gorm:"column:serial_no;type:varchar(100);comment:编号" json:"serialNo"`              // 编号
+	Remark        *string    `gorm:"column:remark;type:varchar(1024);comment:备注" json:"remark"`                  // 备注
+	CreateTime    *time.Time `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`            // 创建时间
+	UpdateTime    *time.Time `gorm:"column:update_time;type:datetime;comment:更新时间" json:"updateTime"`            // 更新时间
+	TenantID      *int64     `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                  // 租户id
+	DeleteFlag    *string    `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
 // TableName MaterialCategory's table name
