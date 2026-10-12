@@ -7,6 +7,7 @@ import (
 	"github.com/rainbrookx/erp/internal/infrastructure/config"
 	"github.com/rainbrookx/erp/internal/infrastructure/database"
 	"github.com/rainbrookx/erp/internal/infrastructure/redis_infr"
+	"github.com/rainbrookx/erp/internal/query"
 	"github.com/rainbrookx/erp/internal/router"
 	"github.com/rainbrookx/erp/internal/util"
 )
@@ -30,6 +31,7 @@ func initMain() {
 	config.InitConfig()
 
 	database.InitDatabase(config.C.Database)
+	query.SetDefault(database.DB)
 	redis_infr.InitRedis(config.C.Redis)
 	util.InitRandomImageUtil(redis_infr.R)
 	util.InitRedisUtil(redis_infr.R)

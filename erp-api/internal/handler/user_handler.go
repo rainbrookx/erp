@@ -53,7 +53,7 @@ func (h *UserHandler) Login(c *gin.Context) {
 		return
 	}
 
-	// todo 从数据库查询
+	// 从数据库查询
 	loginData, err := service.Login(c, req.LoginName, req.Password)
 	if err != nil {
 		c.JSON(200, dto.Response[any]{

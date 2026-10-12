@@ -4,8 +4,8 @@ import (
 	"context"
 	"errors"
 
-	"github.com/rainbrookx/erp/internal/infrastructure/database"
 	"github.com/rainbrookx/erp/internal/model"
+	"github.com/rainbrookx/erp/internal/query"
 	"gorm.io/gorm"
 )
 
@@ -15,20 +15,20 @@ func GetUserByLoginNameWithDeleteFlag(ctx context.Context, loginName, deleteFlag
 		return nil, errors.New("access service error")
 	}
 
-	var user model.User
+	var user *model.User
 
-	err := database.DB.
-		WithContext(ctx).
-		Where(map[string]any{
-			"login_name":  loginName,
-			"delete_flag": deleteFlag,
-		}).
-		First(&user).
-		Error
+	u := query.Q.User
+
+	user, err := u.WithContext(ctx).
+		Where(
+			u.LoginName.Eq(loginName),
+			u.DeleteFlag.Eq(deleteFlag),
+		).
+		First()
 
 	switch {
 	case err == nil:
-		return &user, nil
+		return user, nil
 	case errors.Is(err, gorm.ErrRecordNotFound):
 		return nil, errors.New("user is not exist")
 	default:

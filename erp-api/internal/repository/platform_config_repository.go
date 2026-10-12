@@ -5,8 +5,8 @@ import (
 	"errors"
 	"strings"
 
-	"github.com/rainbrookx/erp/internal/infrastructure/database"
 	"github.com/rainbrookx/erp/internal/model"
+	"github.com/rainbrookx/erp/internal/query"
 )
 
 func GetPlatformConfigByKey(ctx context.Context, platformKey string) (*model.PlatformConfig, error) {
@@ -19,15 +19,17 @@ func GetPlatformConfigByKey(ctx context.Context, platformKey string) (*model.Pla
 		return nil, errors.New("禁止查询：" + platformKey)
 	}
 
-	var m model.PlatformConfig
+	var platformConfig *model.PlatformConfig
 
-	if err := database.DB.
-		WithContext(ctx).
-		Where(model.PlatformConfig{PlatformKey: &platformKey}).
-		First(&m).
-		Error; err != nil {
+	c := query.Q.PlatformConfig
+
+	platformConfig, err := c.WithContext(ctx).
+		Where(c.PlatformKey.Eq(platformKey)).
+		First()
+
+	if err != nil {
 		return nil, err
 	}
 
-	return &m, nil
+	return platformConfig, nil
 }
