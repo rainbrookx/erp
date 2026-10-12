@@ -44,7 +44,7 @@ func Login(ctx *gin.Context, loginName, password string) (*map[string]any, error
 	util.StorageObjectBySession(ctx, token, "userId", user.ID)
 
 	// 判断密码是否为默认的
-	pwdSimple := strings.EqualFold(util.MD5Crypto("123456"), util.MD5Crypto(*user.Password))
+	pwdSimple := strings.EqualFold(util.MD5Crypto("123456"), *user.Password)
 	// TODO 如果是管理员，则发送登录邮件
 
 	// 组装数据返回

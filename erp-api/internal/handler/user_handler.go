@@ -64,3 +64,7 @@ func (h *UserHandler) Login(c *gin.Context) {
 
 	c.JSON(200, dto.Success(loginData))
 }
+
+func (h *UserHandler) InfoWithTenant(context *gin.Context) {
+	// todo 未实现
+}

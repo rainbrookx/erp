@@ -8,6 +8,8 @@ import (
 func InitRouter(router *gin.RouterGroup) {
 	bindUserHandler(router)
 	bindPlatformConfigHandler(router)
+	bindFunctionHandler(router)
+	bindMaterialPropertyHandler(router)
 }
 
 // bindUserHandler 用户管理
@@ -19,6 +21,7 @@ func bindUserHandler(router *gin.RouterGroup) {
 
 	r.GET("/randomImage", h.RandomImage)
 	r.POST("/login", h.Login)
+	r.GET("/infoWithTenant", h.InfoWithTenant)
 }
 
 // 平台参数
@@ -33,4 +36,24 @@ func bindPlatformConfigHandler(router *gin.RouterGroup) {
 	r.GET("/getPlatform/registerFlag", h.GetPlatformRegisterFlag)
 	r.GET("/getPlatform/checkcodeFlag", h.GetPlatformCheckCodeFlag)
 	r.GET("/getPlatform/appVersion", h.GetPlatformAppVersion)
+	r.GET("/getInfoByKey", h.GetInfoByKey)
+}
+
+// 菜单功能
+func bindFunctionHandler(router *gin.RouterGroup) {
+	relativePath := "/function"
+
+	r := router.Group(relativePath)
+	h := handler.NewFunctionHandler()
+
+	r.POST("/findMenuByPNumber", h.FindMenuByPNumber)
+}
+
+func bindMaterialPropertyHandler(router *gin.RouterGroup) {
+	relativePath := "/materialProperty"
+
+	r := router.Group(relativePath)
+	h := handler.NewMaterialPropertyHandler()
+
+	r.GET("/getAllList", h.GetAllList)
 }

@@ -69,3 +69,7 @@ func (h *PlatformConfigHandler) GetPlatformAppVersion(c *gin.Context) {
 
 	c.String(200, *value.PlatformValue)
 }
+
+func (h *PlatformConfigHandler) GetInfoByKey(context *gin.Context) {
+	// todo 未实现
+}
