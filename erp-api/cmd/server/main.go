@@ -20,11 +20,14 @@ func main() {
 	group := engine.Group("/jshERP-boot")
 	router.InitRouter(group)
 
-	err := engine.Run(":9999")
+	// 127.0.0.1 当前仅监听本机回环
+	err := engine.Run("127.0.0.1:9999")
 	if err != nil {
 		slog.Error(err.Error())
 		return
 	}
+
+	// TODO 可以考虑加上优雅退出
 }
 
 func initMain() {

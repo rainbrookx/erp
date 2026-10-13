@@ -5,6 +5,8 @@ import (
 	"time"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rainbrookx/erp/internal/model"
+	"github.com/rainbrookx/erp/internal/query"
 	"github.com/redis/go-redis/v9"
 )
 
@@ -58,4 +60,28 @@ func DeleteObjectBySession(ctx *gin.Context, key string) {
 func StorageObjectBySession(ctx *gin.Context, token, key string, obj any) {
 	bind.client.HSet(ctx, token, key, obj)
 	bind.client.Expire(ctx, token, time.Duration(maxSessionInSeconds)*time.Second)
+}
+
+// GetCurrentUser 获取当前用户信息
+func GetCurrentUser(ctx *gin.Context) (*model.User, error) {
+	stringCmd, err := GetObjectFromSessionByKey(ctx, "userId")
+	if err != nil {
+		return nil, err
+	}
+
+	userId, err := stringCmd.Int64()
+	if err != nil {
+		return nil, err
+	}
+
+	u := query.Q.User
+	user, err := u.WithContext(ctx).
+		Where(u.ID.Eq(userId)).
+		First()
+
+	if err != nil {
+		return nil, err
+	}
+
+	return user, nil
 }
