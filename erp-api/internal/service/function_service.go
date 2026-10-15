@@ -1,6 +1,7 @@
 package service
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 	"strings"
@@ -42,10 +43,15 @@ func FindMenuByPNumber(ctx *gin.Context, pNumber, userId string) ([]dto.MenuDto,
 
 	// 获取系统配置信息-是否开启多级审核
 	approvalFlag := "0"
-	systemConfig, err := repository.GetSystemConfig()
+	systemConfig, err := repository.GetSystemConfig(ctx)
 	if err != nil {
 		return nil, err
 	}
+
+	if systemConfig == nil {
+		return nil, errors.New("systemConfig 为空")
+	}
+
 	approvalFlag = *systemConfig.MultiLevelApprovalFlag
 
 	dataList, err := repository.ListFunctionByPNumber(ctx, pNumber)
@@ -67,20 +73,14 @@ func FindMenuByPNumber(ctx *gin.Context, pNumber, userId string) ([]dto.MenuDto,
 
 		// 增加首页菜单项
 		homeItem := dto.MenuDto{
-			Id:        ptr[int64](0),
-			Text:      ptr[string]("首页"),
-			Icon:      ptr[string]("home"),
-			Url:       ptr[string]("/dashboard/analysis"),
-			Component: ptr[string]("/layouts/TabLayout"),
+			Id:        new(int64(0)),
+			Text:      new("首页"),
+			Icon:      new("home"),
+			Url:       new("/dashboard/analysis"),
+			Component: new("/layouts/TabLayout"),
 		}
 		dataArray = append([]dto.MenuDto{homeItem}, dataArray...)
 	}
 
 	return dataArray, nil
-}
-
-// === 辅助函数
-
-func ptr[T any](v T) *T {
-	return &v
 }

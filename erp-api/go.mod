@@ -2,7 +2,16 @@ module github.com/rainbrookx/erp
 
 go 1.27.1
 
-require github.com/spf13/viper v1.21.0
+require (
+	github.com/gin-gonic/gin v1.12.0
+	github.com/mojocn/base64Captcha v1.3.8
+	github.com/redis/go-redis/v9 v9.23.0
+	github.com/spf13/viper v1.21.0
+	gorm.io/driver/mysql v1.6.0
+	gorm.io/gen v0.3.29
+	gorm.io/gorm v1.31.2
+	gorm.io/plugin/dbresolver v1.6.2
+)
 
 require (
 	filippo.io/edwards25519 v1.2.0 // indirect
@@ -14,7 +23,6 @@ require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.15 // indirect
 	github.com/gin-contrib/sse v1.1.2 // indirect
-	github.com/gin-gonic/gin v1.12.0 // indirect
 	github.com/go-playground/locales v0.14.2 // indirect
 	github.com/go-playground/universal-translator v0.18.2 // indirect
 	github.com/go-playground/validator/v10 v10.30.5 // indirect
@@ -32,11 +40,9 @@ require (
 	github.com/mattn/go-isatty v0.0.24 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/mojocn/base64Captcha v1.3.8 // indirect
 	github.com/pelletier/go-toml/v2 v2.4.3 // indirect
 	github.com/quic-go/qpack v0.6.0 // indirect
 	github.com/quic-go/quic-go v0.63.0 // indirect
-	github.com/redis/go-redis/v9 v9.23.0 // indirect
 	github.com/sagikazarmark/locafero v0.11.0 // indirect
 	github.com/sourcegraph/conc v0.3.1-0.20240121214520-5f936abd7ae8 // indirect
 	github.com/spf13/afero v1.15.0 // indirect
@@ -60,9 +66,5 @@ require (
 	golang.org/x/tools v0.51.0 // indirect
 	google.golang.org/protobuf v1.36.12 // indirect
 	gorm.io/datatypes v1.2.7 // indirect
-	gorm.io/driver/mysql v1.6.0 // indirect
-	gorm.io/gen v0.3.29 // indirect
-	gorm.io/gorm v1.31.2 // indirect
 	gorm.io/hints v1.1.2 // indirect
-	gorm.io/plugin/dbresolver v1.6.2 // indirect
 )
