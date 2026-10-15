@@ -12,16 +12,16 @@ const TableNameTenant = "jsh_tenant"
 
 // Tenant 租户
 type Tenant struct {
-	ID           int64          `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`     // 主键
-	TenantID     *int64         `gorm:"column:tenant_id;type:bigint;comment:用户id" json:"tenantId"`                    // 用户id
-	LoginName    *string        `gorm:"column:login_name;type:varchar(255);comment:登录名" json:"loginName"`             // 登录名
-	UserNumLimit *int32         `gorm:"column:user_num_limit;type:int;comment:用户数量限制" json:"userNumLimit"`            // 用户数量限制
-	Type         *string        `gorm:"column:type;type:varchar(1);comment:租户类型，0免费租户，1付费租户" json:"type"`             // 租户类型，0免费租户，1付费租户
-	Enabled      *NullMyBitBool `gorm:"column:enabled;type:bit(1);default:b'1';comment:启用 0-禁用  1-启用" json:"enabled"` // 启用 0-禁用  1-启用
-	CreateTime   *time.Time     `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`              // 创建时间
-	ExpireTime   *time.Time     `gorm:"column:expire_time;type:datetime;comment:到期时间" json:"expireTime"`              // 到期时间
-	Remark       *string        `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`                     // 备注
-	DeleteFlag   *string        `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`   // 删除标记，0未删除，1删除
+	ID           int64          `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`   // 主键
+	TenantID     *int64         `gorm:"column:tenant_id;type:bigint;comment:用户id" json:"tenantId"`                  // 用户id
+	LoginName    *string        `gorm:"column:login_name;type:varchar(255);comment:登录名" json:"loginName"`           // 登录名
+	UserNumLimit *int32         `gorm:"column:user_num_limit;type:int;comment:用户数量限制" json:"userNumLimit"`          // 用户数量限制
+	Type         *string        `gorm:"column:type;type:varchar(1);comment:租户类型，0免费租户，1付费租户" json:"type"`           // 租户类型，0免费租户，1付费租户
+	Enabled      *NullMyBitBool `gorm:"column:enabled;type:bit(1);comment:启用 0-禁用  1-启用" json:"enabled"`            // 启用 0-禁用  1-启用
+	CreateTime   *time.Time     `gorm:"column:create_time;type:datetime;comment:创建时间" json:"createTime"`            // 创建时间
+	ExpireTime   *time.Time     `gorm:"column:expire_time;type:datetime;comment:到期时间" json:"expireTime"`            // 到期时间
+	Remark       *string        `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`                   // 备注
+	DeleteFlag   *string        `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"` // 删除标记，0未删除，1删除
 }
 
 // TableName Tenant's table name

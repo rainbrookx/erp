@@ -23,7 +23,7 @@ func InitDatabase(cfg config.DatabaseConfig) {
 		"utf8mb4",
 		"Local",
 	)
-	slog.Info("连接数据库", "dsn", dsn)
+	slog.Info("连接数据库")
 
 	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
 	if err != nil {

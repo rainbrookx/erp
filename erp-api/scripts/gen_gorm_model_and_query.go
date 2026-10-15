@@ -7,6 +7,7 @@ import (
 	"github.com/rainbrookx/erp/internal/infrastructure/config"
 	"github.com/rainbrookx/erp/internal/infrastructure/database"
 	"gorm.io/gen"
+	"gorm.io/gen/field"
 	"gorm.io/gorm"
 )
 
@@ -39,7 +40,7 @@ func main() {
 
 	// 指定 Model 名称的生成策略
 	g.WithModelNameStrategy(func(tableName string) string {
-		name := strings.TrimPrefix(tableName, "jsh_")
+		name := strings.TrimPrefix(tableName, tablePrefix)
 		if name == "" {
 			return ""
 		}
@@ -77,11 +78,31 @@ func main() {
 	g.WithDataTypeMap(dataMap)
 
 	// 👉 指定表名，生成model；多个表写多次
-	//model := g.GenerateModel("jsh_platform_config")
+	//model := g.GenerateModel("jsh_account")
 	//g.ApplyBasic(model)
 
 	// 全部表一次性生成
-	g.ApplyBasic(g.GenerateAllTable()...)
+	//g.ApplyBasic(g.GenerateAllTable()...)
+
+	// 为了兼容！！！！！！jsh_tenant.enabled 的 DEFAULT b'1'
+	// `enabled` bit(1) DEFAULT b'1' COMMENT '启用 0-禁用  1-启用',
+	tables, err := db.Migrator().GetTables()
+	if err != nil {
+		panic("get tables error: " + err.Error())
+	}
+
+	for _, tbl := range tables {
+		if !strings.HasPrefix(tbl, tablePrefix) {
+			continue
+		}
+		model := g.GenerateModel(tbl,
+			gen.FieldGORMTag("enabled", func(tag field.GormTag) field.GormTag {
+				delete(tag, "default")
+				return tag
+			}),
+		)
+		g.ApplyBasic(model)
+	}
 
 	g.Execute()
 }

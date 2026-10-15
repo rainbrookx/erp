@@ -1,7 +1,6 @@
 package service
 
 import (
-	"bytes"
 	"context"
 	"errors"
 	"strconv"
@@ -76,7 +75,13 @@ func validateUser(ctx context.Context, loginName, password string) (msgTip strin
 	}
 
 	if tenant != nil {
-		if !bytes.Equal(*tenant.Enabled, []byte{1}) {
+
+		trueBit := model.NullMyBitBool{
+			MyBitBool: true,
+			Valid:     true,
+		}
+
+		if *tenant.Enabled == trueBit {
 			msgTip = "tenant is black"
 			return msgTip, nil, errors.New(msgTip)
 		}
