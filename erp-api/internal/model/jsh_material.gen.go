@@ -8,31 +8,31 @@ const TableNameMaterial = "jsh_material"
 
 // Material 产品表
 type Material struct {
-	ID                 int64    `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`                    // 主键
-	CategoryID         *int64   `gorm:"column:category_id;type:bigint;comment:产品类型id" json:"categoryId"`                             // 产品类型id
-	Name               *string  `gorm:"column:name;type:varchar(100);comment:名称" json:"name"`                                        // 名称
-	Mfrs               *string  `gorm:"column:mfrs;type:varchar(50);comment:制造商" json:"mfrs"`                                        // 制造商
-	Model              *string  `gorm:"column:model;type:varchar(100);comment:型号" json:"model"`                                      // 型号
-	Standard           *string  `gorm:"column:standard;type:varchar(100);comment:规格" json:"standard"`                                // 规格
-	Brand              *string  `gorm:"column:brand;type:varchar(100);comment:品牌" json:"brand"`                                      // 品牌
-	Mnemonic           *string  `gorm:"column:mnemonic;type:varchar(100);comment:助记码" json:"mnemonic"`                               // 助记码
-	Color              *string  `gorm:"column:color;type:varchar(50);comment:颜色" json:"color"`                                       // 颜色
-	Unit               *string  `gorm:"column:unit;type:varchar(50);comment:单位-单个" json:"unit"`                                      // 单位-单个
-	Remark             *string  `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`                                    // 备注
-	ImgName            *string  `gorm:"column:img_name;type:varchar(1000);comment:图片名称" json:"imgName"`                              // 图片名称
-	UnitID             *int64   `gorm:"column:unit_id;type:bigint;comment:单位Id" json:"unitId"`                                       // 单位Id
-	ExpiryNum          *int32   `gorm:"column:expiry_num;type:int;comment:保质期天数" json:"expiryNum"`                                   // 保质期天数
-	Weight             *float64 `gorm:"column:weight;type:decimal(24,6);comment:基础重量(kg)" json:"weight"`                             // 基础重量(kg)
-	Enabled            *[]uint8 `gorm:"column:enabled;type:bit(1);comment:启用 0-禁用  1-启用" json:"enabled"`                             // 启用 0-禁用  1-启用
-	OtherField1        *string  `gorm:"column:other_field1;type:varchar(500);comment:自定义1" json:"otherField1"`                       // 自定义1
-	OtherField2        *string  `gorm:"column:other_field2;type:varchar(500);comment:自定义2" json:"otherField2"`                       // 自定义2
-	OtherField3        *string  `gorm:"column:other_field3;type:varchar(500);comment:自定义3" json:"otherField3"`                       // 自定义3
-	EnableSerialNumber *string  `gorm:"column:enable_serial_number;type:varchar(1);comment:是否开启序列号，0否，1是" json:"enableSerialNumber"` // 是否开启序列号，0否，1是
-	EnableBatchNumber  *string  `gorm:"column:enable_batch_number;type:varchar(1);comment:是否开启批号，0否，1是" json:"enableBatchNumber"`    // 是否开启批号，0否，1是
-	Position           *string  `gorm:"column:position;type:varchar(100);comment:仓位货架" json:"position"`                              // 仓位货架
-	Attribute          *string  `gorm:"column:attribute;type:varchar(1000);comment:多属性信息" json:"attribute"`                          // 多属性信息
-	TenantID           *int64   `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                                   // 租户id
-	DeleteFlag         *string  `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`                  // 删除标记，0未删除，1删除
+	ID                 int64          `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`                    // 主键
+	CategoryID         *int64         `gorm:"column:category_id;type:bigint;comment:产品类型id" json:"categoryId"`                             // 产品类型id
+	Name               *string        `gorm:"column:name;type:varchar(100);comment:名称" json:"name"`                                        // 名称
+	Mfrs               *string        `gorm:"column:mfrs;type:varchar(50);comment:制造商" json:"mfrs"`                                        // 制造商
+	Model              *string        `gorm:"column:model;type:varchar(100);comment:型号" json:"model"`                                      // 型号
+	Standard           *string        `gorm:"column:standard;type:varchar(100);comment:规格" json:"standard"`                                // 规格
+	Brand              *string        `gorm:"column:brand;type:varchar(100);comment:品牌" json:"brand"`                                      // 品牌
+	Mnemonic           *string        `gorm:"column:mnemonic;type:varchar(100);comment:助记码" json:"mnemonic"`                               // 助记码
+	Color              *string        `gorm:"column:color;type:varchar(50);comment:颜色" json:"color"`                                       // 颜色
+	Unit               *string        `gorm:"column:unit;type:varchar(50);comment:单位-单个" json:"unit"`                                      // 单位-单个
+	Remark             *string        `gorm:"column:remark;type:varchar(500);comment:备注" json:"remark"`                                    // 备注
+	ImgName            *string        `gorm:"column:img_name;type:varchar(1000);comment:图片名称" json:"imgName"`                              // 图片名称
+	UnitID             *int64         `gorm:"column:unit_id;type:bigint;comment:单位Id" json:"unitId"`                                       // 单位Id
+	ExpiryNum          *int32         `gorm:"column:expiry_num;type:int;comment:保质期天数" json:"expiryNum"`                                   // 保质期天数
+	Weight             *float64       `gorm:"column:weight;type:decimal(24,6);comment:基础重量(kg)" json:"weight"`                             // 基础重量(kg)
+	Enabled            *NullMyBitBool `gorm:"column:enabled;type:bit(1);comment:启用 0-禁用  1-启用" json:"enabled"`                             // 启用 0-禁用  1-启用
+	OtherField1        *string        `gorm:"column:other_field1;type:varchar(500);comment:自定义1" json:"otherField1"`                       // 自定义1
+	OtherField2        *string        `gorm:"column:other_field2;type:varchar(500);comment:自定义2" json:"otherField2"`                       // 自定义2
+	OtherField3        *string        `gorm:"column:other_field3;type:varchar(500);comment:自定义3" json:"otherField3"`                       // 自定义3
+	EnableSerialNumber *string        `gorm:"column:enable_serial_number;type:varchar(1);comment:是否开启序列号，0否，1是" json:"enableSerialNumber"` // 是否开启序列号，0否，1是
+	EnableBatchNumber  *string        `gorm:"column:enable_batch_number;type:varchar(1);comment:是否开启批号，0否，1是" json:"enableBatchNumber"`    // 是否开启批号，0否，1是
+	Position           *string        `gorm:"column:position;type:varchar(100);comment:仓位货架" json:"position"`                              // 仓位货架
+	Attribute          *string        `gorm:"column:attribute;type:varchar(1000);comment:多属性信息" json:"attribute"`                          // 多属性信息
+	TenantID           *int64         `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                                   // 租户id
+	DeleteFlag         *string        `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`                  // 删除标记，0未删除，1删除
 }
 
 // TableName Material's table name

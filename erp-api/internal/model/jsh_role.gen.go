@@ -8,16 +8,16 @@ const TableNameRole = "jsh_role"
 
 // Role 角色表
 type Role struct {
-	ID          int64    `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`                   // 主键
-	Name        *string  `gorm:"column:name;type:varchar(50);comment:名称" json:"name"`                                        // 名称
-	Type        *string  `gorm:"column:type;type:varchar(50);comment:类型" json:"type"`                                        // 类型
-	PriceLimit  *string  `gorm:"column:price_limit;type:varchar(50);comment:价格屏蔽 1-屏蔽采购价 2-屏蔽零售价 3-屏蔽销售价" json:"priceLimit"` // 价格屏蔽 1-屏蔽采购价 2-屏蔽零售价 3-屏蔽销售价
-	Value       *string  `gorm:"column:value;type:varchar(200);comment:值" json:"value"`                                      // 值
-	Description *string  `gorm:"column:description;type:varchar(100);comment:描述" json:"description"`                         // 描述
-	Enabled     *[]uint8 `gorm:"column:enabled;type:bit(1);comment:启用" json:"enabled"`                                       // 启用
-	Sort        *string  `gorm:"column:sort;type:varchar(10);comment:排序" json:"sort"`                                        // 排序
-	TenantID    *int64   `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                                  // 租户id
-	DeleteFlag  *string  `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`                 // 删除标记，0未删除，1删除
+	ID          int64          `gorm:"column:id;type:bigint;primaryKey;autoIncrement:true;comment:主键" json:"id"`                   // 主键
+	Name        *string        `gorm:"column:name;type:varchar(50);comment:名称" json:"name"`                                        // 名称
+	Type        *string        `gorm:"column:type;type:varchar(50);comment:类型" json:"type"`                                        // 类型
+	PriceLimit  *string        `gorm:"column:price_limit;type:varchar(50);comment:价格屏蔽 1-屏蔽采购价 2-屏蔽零售价 3-屏蔽销售价" json:"priceLimit"` // 价格屏蔽 1-屏蔽采购价 2-屏蔽零售价 3-屏蔽销售价
+	Value       *string        `gorm:"column:value;type:varchar(200);comment:值" json:"value"`                                      // 值
+	Description *string        `gorm:"column:description;type:varchar(100);comment:描述" json:"description"`                         // 描述
+	Enabled     *NullMyBitBool `gorm:"column:enabled;type:bit(1);comment:启用" json:"enabled"`                                       // 启用
+	Sort        *string        `gorm:"column:sort;type:varchar(10);comment:排序" json:"sort"`                                        // 排序
+	TenantID    *int64         `gorm:"column:tenant_id;type:bigint;comment:租户id" json:"tenantId"`                                  // 租户id
+	DeleteFlag  *string        `gorm:"column:delete_flag;type:varchar(1);comment:删除标记，0未删除，1删除" json:"deleteFlag"`                 // 删除标记，0未删除，1删除
 }
 
 // TableName Role's table name

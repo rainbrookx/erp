@@ -7,6 +7,7 @@ import (
 	"github.com/rainbrookx/erp/internal/infrastructure/config"
 	"github.com/rainbrookx/erp/internal/infrastructure/database"
 	"gorm.io/gen"
+	"gorm.io/gorm"
 )
 
 func main() {
@@ -56,6 +57,24 @@ func main() {
 	g.Config.WithJSONTagNameStrategy(snakeToLowerCamel)
 
 	g.UseDB(db)
+
+	// ✅ bit 类型映射核心配置
+	dataMap := map[string]func(columnType gorm.ColumnType) string{
+		"bit": func(ct gorm.ColumnType) string {
+			rawType, _ := ct.ColumnType()
+			nullable, _ := ct.Nullable()
+			// 只处理 bit(1)
+			if strings.HasPrefix(rawType, "bit(1)") {
+				if nullable {
+					return "NullMyBitBool"
+				}
+				return "MyBitBool"
+			}
+			// 其他 bit(N) 你自己决定，比如返回 []byte
+			return "[]byte"
+		},
+	}
+	g.WithDataTypeMap(dataMap)
 
 	// 👉 指定表名，生成model；多个表写多次
 	//model := g.GenerateModel("jsh_platform_config")
