@@ -6,7 +6,7 @@ import (
 	"github.com/rainbrookx/erp/internal/query"
 )
 
-func GetUserBusinessByKeyIdAndType(ctx *gin.Context, keyId, type_ string) ([]*model.UserBusiness, error) {
+func ListUserBusinessByKeyIdAndType(ctx *gin.Context, keyId, type_ string) ([]*model.UserBusiness, error) {
 	u := query.Q.UserBusiness
 	list, err := u.WithContext(ctx).
 		Where(u.KeyID.Eq(keyId), u.Type.Eq(type_)).

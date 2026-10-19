@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-	"fmt"
 	"strconv"
 	"strings"
 
@@ -17,7 +16,7 @@ func FindMenuByPNumber(ctx *gin.Context, pNumber, userId string) ([]dto.MenuDto,
 	var roleId int64 = 0
 	fc := ""
 
-	roleList, err := repository.GetUserBusinessByKeyIdAndType(ctx, userId, "UserRole")
+	roleList, err := repository.ListUserBusinessByKeyIdAndType(ctx, userId, "UserRole")
 	if err != nil {
 		return nil, err
 	}
@@ -32,7 +31,7 @@ func FindMenuByPNumber(ctx *gin.Context, pNumber, userId string) ([]dto.MenuDto,
 	}
 
 	// 当前用户所拥有的功能列表，格式如：[1][2][5]
-	funList, err := repository.GetUserBusinessByKeyIdAndType(ctx, strconv.FormatInt(roleId, 10), "RoleFunctions")
+	funList, err := repository.ListUserBusinessByKeyIdAndType(ctx, strconv.FormatInt(roleId, 10), "RoleFunctions")
 	if err != nil {
 		return nil, err
 	}
@@ -65,11 +64,16 @@ func FindMenuByPNumber(ctx *gin.Context, pNumber, userId string) ([]dto.MenuDto,
 			return nil, err2
 		}
 		// 获取当前用户所属的租户所拥有的功能id的map
-		// TODO 没看懂代码
 		funIdMap := make(map[int64]int64)
-		fmt.Println(userInfo, funIdMap, fc, approvalFlag)
-		//funIdMap = getCurrentTenantFunIdMap()
-		//dataArray = getMenuByFunction(dataList, fc, approvalFlag, funIdMap, userInfo)
+
+		funIdMap, err2 = util.GetCurrentTenantFunIdMap(ctx)
+		if err2 != nil {
+			return nil, err2
+		}
+		dataArray, err2 = repository.GetMenuByFunction(dataList, fc, approvalFlag, funIdMap, userInfo) // todo bug
+		if err2 != nil {
+			return nil, err2
+		}
 
 		// 增加首页菜单项
 		homeItem := dto.MenuDto{

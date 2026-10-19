@@ -8,3 +8,8 @@ type MenuDto struct {
 	Component *string   `json:"component"`
 	Children  []MenuDto `json:"children,omitempty"`
 }
+
+type FindMenuReq struct {
+	PNumber int64 `json:"pNumber"`
+	UserId  int64 `json:"userId"`
+}

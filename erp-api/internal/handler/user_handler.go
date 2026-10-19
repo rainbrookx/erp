@@ -60,6 +60,7 @@ func (h *UserHandler) Login(c *gin.Context) {
 			Code: 500,
 			Data: gin.H{"message": err.Error()},
 		})
+		return
 	}
 
 	c.JSON(200, dto.Success(loginData))

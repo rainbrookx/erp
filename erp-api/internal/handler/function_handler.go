@@ -1,6 +1,9 @@
 package handler
 
 import (
+	"log/slog"
+	"strconv"
+
 	"github.com/gin-gonic/gin"
 	"github.com/rainbrookx/erp/internal/dto"
 	"github.com/rainbrookx/erp/internal/service"
@@ -13,10 +16,9 @@ func NewFunctionHandler() *FunctionHandler {
 }
 
 func (h *FunctionHandler) FindMenuByPNumber(c *gin.Context) {
-	// TODO 未实现
-	var reqMap map[string]any
+	var req dto.FindMenuReq
 
-	if err := c.ShouldBindJSON(&reqMap); err != nil {
+	if err := c.ShouldBindJSON(&req); err != nil {
 		c.JSON(200, dto.Response[string]{
 			Code:    500,
 			Message: "JSON解析失败",
@@ -24,8 +26,18 @@ func (h *FunctionHandler) FindMenuByPNumber(c *gin.Context) {
 		return
 	}
 
-	pNumber := reqMap["pNumber"].(string)
-	userId := reqMap["userId"].(string)
+	pNumber := strconv.FormatInt(req.PNumber, 10)
+	userId := strconv.FormatInt(req.UserId, 10)
 
-	service.FindMenuByPNumber(c, pNumber, userId)
+	dataArray, err := service.FindMenuByPNumber(c, pNumber, userId)
+	if err != nil {
+		slog.Error(err.Error())
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "获取失败",
+		})
+		return
+	}
+
+	c.JSON(200, dto.Success(dataArray))
 }

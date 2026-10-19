@@ -2,7 +2,7 @@ package model
 
 import (
 	"database/sql/driver"
-	"errors"
+	"fmt"
 )
 
 // MyBitBool 适配 mysql bit(1)
@@ -13,23 +13,26 @@ func (b *MyBitBool) Scan(v any) error {
 		*b = false
 		return nil
 	}
-	bs, ok := v.([]byte)
-	if !ok {
-		return errors.New("bit(1) scan: expect []byte")
+	var result bool
+	switch val := v.(type) {
+	case []byte:
+		result = len(val) > 0 && val[0] == 1
+	case int64:
+		result = val == 1
+	case bool:
+		result = val
+	default:
+		return fmt.Errorf("bit(1) scan: unsupported type %T", v)
 	}
-	if len(bs) == 0 {
-		*b = false
-		return nil
-	}
-	*b = bs[0] == 1
+	*b = MyBitBool(result)
 	return nil
 }
 
 func (b *MyBitBool) Value() (driver.Value, error) {
 	if *b {
-		return []byte{1}, nil
+		return int64(1), nil
 	}
-	return []byte{0}, nil
+	return int64(0), nil
 }
 
 // NullMyBitBool 可空版本（nullable bit(1)）

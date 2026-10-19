@@ -31,5 +31,7 @@ func InitDatabase(cfg config.DatabaseConfig) {
 		panic("连接数据库失败")
 	}
 
+	db = db.Debug() // TODO 开发使用，正式发布要删除
+
 	DB = db
 }

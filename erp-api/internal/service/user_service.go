@@ -81,7 +81,7 @@ func validateUser(ctx context.Context, loginName, password string) (msgTip strin
 			Valid:     true,
 		}
 
-		if *tenant.Enabled == trueBit {
+		if *tenant.Enabled != trueBit {
 			msgTip = "tenant is black"
 			return msgTip, nil, errors.New(msgTip)
 		}
