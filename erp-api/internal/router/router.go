@@ -10,6 +10,8 @@ func InitRouter(router *gin.RouterGroup) {
 	bindPlatformConfigHandler(router)
 	bindFunctionHandler(router)
 	bindMaterialPropertyHandler(router)
+	bindSystemConfigHandler(router)
+	bindNewMsgHandler(router)
 }
 
 // bindUserHandler 用户管理
@@ -58,4 +60,22 @@ func bindMaterialPropertyHandler(router *gin.RouterGroup) {
 	h := handler.NewMaterialPropertyHandler()
 
 	r.GET("/getAllList", h.GetAllList)
+}
+
+func bindSystemConfigHandler(router *gin.RouterGroup) {
+	relativePath := "/systemConfig"
+
+	r := router.Group(relativePath)
+	h := handler.NewSystemConfigHandler()
+
+	r.GET("/getCurrentInfo", h.GetCurrentInfo)
+}
+
+func bindNewMsgHandler(router *gin.RouterGroup) {
+	relativePath := ""
+
+	r := router.Group(relativePath)
+	h := handler.NewMsgHandler()
+
+	r.GET("/list", h.List)
 }
