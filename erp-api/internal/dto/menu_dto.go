@@ -13,3 +13,9 @@ type FindMenuReq struct {
 	PNumber int64 `json:"pNumber"`
 	UserId  int64 `json:"userId"`
 }
+
+type BtnStrDto struct {
+	Url    string `json:"url"`
+	BtnStr string `json:"btnStr"`
+	FunId  int64  `json:"funId,omitempty"`
+}

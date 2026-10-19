@@ -119,3 +119,35 @@ func (h *UserHandler) Logout(c *gin.Context) {
 		Code: 400,
 	})
 }
+
+func (h *UserHandler) GetUserBtnByCurrentUser(c *gin.Context) {
+	user, err := util.GetCurrentUser(c)
+
+	if err != nil {
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "获取失败",
+		})
+		return
+	}
+
+	userId := user.ID
+	loginName := user.LoginName
+
+	btnStrArr, err := service.GetBtnStrArrById(c, userId)
+
+	if err != nil {
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "获取失败",
+		})
+		return
+	}
+
+	data := make(map[string]any)
+	if "admin" != loginName {
+		data["userBtn"] = btnStrArr
+	}
+
+	c.JSON(200, dto.Success(data))
+}

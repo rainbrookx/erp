@@ -89,7 +89,7 @@ func GetMenuByFunction(dataList []*model.Function, fc, approvalFlag string, funI
 			}
 
 			ctx := context.Background()
-			newList, err := GetRoleFunction(&ctx, *function.Number)
+			newList, err := GetRoleFunction(ctx, *function.Number)
 
 			if err != nil {
 				return nil, err
@@ -118,7 +118,7 @@ func GetMenuByFunction(dataList []*model.Function, fc, approvalFlag string, funI
 
 }
 
-func GetRoleFunction(ctx *context.Context, pNumber string) ([]*model.Function, error) {
+func GetRoleFunction(ctx context.Context, pNumber string) ([]*model.Function, error) {
 	f := query.Q.Function
 
 	enabledTrue := model.NullMyBitBool{
@@ -126,11 +126,18 @@ func GetRoleFunction(ctx *context.Context, pNumber string) ([]*model.Function, e
 		Valid:     true,
 	}
 
-	return f.Where(
-		f.Enabled.Eq(&enabledTrue),
-		f.ParentNumber.Eq(pNumber),
-		f.DeleteFlag.Neq("1"),
-	).
+	return f.WithContext(ctx).
+		Where(
+			f.Enabled.Eq(&enabledTrue),
+			f.ParentNumber.Eq(pNumber),
+			f.DeleteFlag.Neq("1"),
+		).
 		Order(f.Sort).
 		Find()
+}
+
+func ListAllFunction(ctx context.Context) ([]*model.Function, error) {
+	f := query.Q.Function
+
+	return f.WithContext(ctx).Find()
 }

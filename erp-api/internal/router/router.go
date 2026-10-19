@@ -23,6 +23,7 @@ func bindUserHandler(router *gin.RouterGroup) {
 	r.POST("/login", h.Login)
 	r.GET("/logout", h.Logout)
 	r.GET("/infoWithTenant", h.InfoWithTenant)
+	r.GET("/getUserBtnByCurrentUser", h.GetUserBtnByCurrentUser)
 }
 
 // 平台参数

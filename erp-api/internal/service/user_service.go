@@ -2,6 +2,7 @@ package service
 
 import (
 	"context"
+	"encoding/json"
 	"errors"
 	"strconv"
 	"strings"
@@ -9,6 +10,7 @@ import (
 	"uuid"
 
 	"github.com/gin-gonic/gin"
+	"github.com/rainbrookx/erp/internal/dto"
 	"github.com/rainbrookx/erp/internal/model"
 	"github.com/rainbrookx/erp/internal/repository"
 	"github.com/rainbrookx/erp/internal/util"
@@ -104,4 +106,66 @@ func validateUser(ctx context.Context, loginName, password string) (msgTip strin
 
 func UserCount(ctx context.Context, tenantID int64) (int64, error) {
 	return repository.UserCount(ctx, tenantID)
+}
+
+func GetBtnStrArrById(ctx *gin.Context, userId int64) ([]dto.BtnStrDto, error) {
+	var btnStrArr []dto.BtnStrDto
+
+	userRoleList, err := repository.ListUserBusinessByKeyIdAndType(ctx, strconv.FormatInt(userId, 10), "UserRole")
+	if err != nil {
+		return nil, err
+	}
+
+	if userRoleList != nil && len(userRoleList) > 0 {
+		roleValue := *userRoleList[0].Value
+		if roleValue != "" &&
+			strings.Contains(roleValue, "[") &&
+			strings.Contains(roleValue, "]") {
+
+			roleValue = strings.ReplaceAll(strings.ReplaceAll(roleValue, "[", ""), "]", "")
+			roleFunctionsList, err2 := repository.ListUserBusinessByKeyIdAndType(ctx, roleValue, "RoleFunctions")
+			if err2 != nil {
+				return nil, err2
+			}
+
+			if roleFunctionsList != nil && len(roleFunctionsList) > 0 {
+				btnStr := *roleFunctionsList[0].BtnStr
+				if btnStr != "" {
+					err2 = json.Unmarshal([]byte(btnStr), &btnStrArr)
+					if err2 != nil {
+						return nil, err2
+					}
+				}
+			}
+		}
+	}
+
+	// 将数组中的funId转为url
+	var btnStrWithUrlArr []dto.BtnStrDto
+	if len(btnStrArr) > 0 {
+		functionList, err2 := repository.ListAllFunction(ctx)
+		if err2 != nil {
+			return nil, err2
+		}
+
+		functionMap := make(map[int64]string)
+
+		for _, function := range functionList {
+			functionMap[function.ID] = *function.URL
+		}
+
+		for _, obj := range btnStrArr {
+			funId := obj.FunId
+			btnStr := obj.BtnStr
+
+			btnStrWithUrlObj := dto.BtnStrDto{
+				Url:    functionMap[funId],
+				BtnStr: btnStr,
+			}
+
+			btnStrWithUrlArr = append(btnStrWithUrlArr, btnStrWithUrlObj)
+		}
+	}
+
+	return btnStrWithUrlArr, nil
 }
