@@ -101,3 +101,7 @@ func validateUser(ctx context.Context, loginName, password string) (msgTip strin
 	msgTip = "user can login"
 	return msgTip, user, nil
 }
+
+func UserCount(ctx context.Context, tenantID int64) (int64, error) {
+	return repository.UserCount(ctx, tenantID)
+}

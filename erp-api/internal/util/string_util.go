@@ -3,6 +3,7 @@ package util
 import (
 	"strconv"
 	"strings"
+	"time"
 )
 
 // StrToLongList "1,2,3,4,5,6" -> []int64{1,2,3,4,5,6}
@@ -23,4 +24,12 @@ func StrToLongList(strArr string) []int64 {
 		idList = append(idList, n)
 	}
 	return idList
+}
+
+func ParseDateToStr(t *time.Time) string {
+	if t == nil {
+		return ""
+	}
+	// Go 的时间格式化模板固定为：2006-01-02 15:04:05
+	return t.Format("2006-01-02")
 }

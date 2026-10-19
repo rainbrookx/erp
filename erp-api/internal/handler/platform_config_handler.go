@@ -2,6 +2,7 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/rainbrookx/erp/internal/dto"
 	"github.com/rainbrookx/erp/internal/service"
 )
 
@@ -70,6 +71,18 @@ func (h *PlatformConfigHandler) GetPlatformAppVersion(c *gin.Context) {
 	c.String(200, *value.PlatformValue)
 }
 
-func (h *PlatformConfigHandler) GetInfoByKey(context *gin.Context) {
-	// todo 未实现
+func (h *PlatformConfigHandler) GetInfoByKey(c *gin.Context) {
+	platformKey := c.Query("platformKey")
+
+	value, err := service.GetPlatformConfigInfoByKey(c, platformKey)
+
+	if err != nil {
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "获取数据失败",
+		})
+		return
+	}
+
+	c.JSON(200, dto.Success(value))
 }

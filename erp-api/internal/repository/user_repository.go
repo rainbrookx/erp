@@ -35,3 +35,15 @@ func GetUserByLoginNameWithDeleteFlag(ctx context.Context, loginName, deleteFlag
 		return nil, errors.New("access service error")
 	}
 }
+
+func UserCount(ctx context.Context, tenantID int64) (int64, error) {
+	u := query.Q.User
+
+	return u.WithContext(ctx).
+		Where(
+			u.Status.Eq(0),
+			u.DeleteFlag.Neq("1"),
+			u.TenantID.Eq(tenantID),
+		).
+		Count()
+}

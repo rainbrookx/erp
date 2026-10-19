@@ -28,3 +28,7 @@ func GetPlatformCheckCodeFlag(ctx context.Context) (*model.PlatformConfig, error
 func GetPlatformAppVersion(ctx context.Context) (*model.PlatformConfig, error) {
 	return repository.GetPlatformConfigByKey(ctx, "app_version")
 }
+
+func GetPlatformConfigInfoByKey(ctx context.Context, platformKey string) (*model.PlatformConfig, error) {
+	return repository.GetPlatformConfigByKey(ctx, platformKey)
+}

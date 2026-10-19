@@ -2,6 +2,7 @@ package handler
 
 import (
 	"log/slog"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/rainbrookx/erp/internal/dto"
@@ -66,6 +67,46 @@ func (h *UserHandler) Login(c *gin.Context) {
 	c.JSON(200, dto.Success(loginData))
 }
 
-func (h *UserHandler) InfoWithTenant(context *gin.Context) {
-	// todo 未实现
+func (h *UserHandler) InfoWithTenant(c *gin.Context) {
+	user, err := util.GetCurrentUser(c)
+	if err != nil {
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "获取失败",
+		})
+		return
+	}
+
+	// 获取当前用户数
+	userCurrentNum, err := service.UserCount(c, *user.TenantID)
+	if err != nil {
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "获取失败",
+		})
+		return
+	}
+
+	tenant, err := service.GetTenantByTenantId(c, *user.TenantID)
+	if err != nil {
+		c.JSON(500, dto.Response[string]{
+			Code: 500,
+			Data: "获取失败",
+		})
+		return
+	}
+
+	// 租户已经过期，移除token
+	if tenant.ExpireTime != nil && time.Now().After(*tenant.ExpireTime) {
+		util.DeleteObjectBySession(c, "userId")
+		util.DeleteObjectBySession(c, "clientIp")
+	}
+
+	data := make(map[string]any)
+	data["type"] = tenant.Type
+	data["expireTime"] = util.ParseDateToStr(tenant.ExpireTime)
+	data["userCurrentNum"] = userCurrentNum
+	data["userNumLimit"] = tenant.UserNumLimit
+	data["tenantId"] = tenant.TenantID
+	c.JSON(200, dto.Success(data))
 }
