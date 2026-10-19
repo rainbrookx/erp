@@ -110,3 +110,12 @@ func (h *UserHandler) InfoWithTenant(c *gin.Context) {
 	data["tenantId"] = tenant.TenantID
 	c.JSON(200, dto.Success(data))
 }
+
+func (h *UserHandler) Logout(c *gin.Context) {
+	util.DeleteObjectBySession(c, "userId")
+	util.DeleteObjectBySession(c, "clientIp")
+
+	c.JSON(200, dto.Response[any]{
+		Code: 400,
+	})
+}

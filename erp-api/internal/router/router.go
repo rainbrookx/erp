@@ -21,6 +21,7 @@ func bindUserHandler(router *gin.RouterGroup) {
 
 	r.GET("/randomImage", h.RandomImage)
 	r.POST("/login", h.Login)
+	r.GET("/logout", h.Logout)
 	r.GET("/infoWithTenant", h.InfoWithTenant)
 }
 

@@ -39,5 +39,5 @@ func (h *FunctionHandler) FindMenuByPNumber(c *gin.Context) {
 		return
 	}
 
-	c.JSON(200, dto.Success(dataArray))
+	c.JSON(200, dataArray)
 }
