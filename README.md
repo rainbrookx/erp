@@ -45,3 +45,9 @@
 
 - golang 默认0值
 - 数据库 bool 用 bit(1) 的坑
+- 原始 Java 代码有太多的“隐式依赖”
+
+## Java 的隐式依赖（缺点）
+
+- 自定义的分页：直接用无传参 `PageUtils.startPage()` 配合 `RequestContextHolder` 获取分页参数
+- 自定义的多租户插件：直接用 `RequestContextHolder` 的 header 参数中获取 token，解析出用户和租户

@@ -70,7 +70,7 @@ func FindMenuByPNumber(ctx *gin.Context, pNumber, userId string) ([]dto.MenuDto,
 		if err2 != nil {
 			return nil, err2
 		}
-		dataArray, err2 = repository.GetMenuByFunction(dataList, fc, approvalFlag, funIdMap, userInfo) // todo bug
+		dataArray, err2 = repository.GetMenuByFunction(dataList, fc, approvalFlag, funIdMap, userInfo)
 		if err2 != nil {
 			return nil, err2
 		}

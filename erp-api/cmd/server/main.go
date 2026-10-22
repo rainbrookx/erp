@@ -21,7 +21,7 @@ func main() {
 	router.InitRouter(group)
 
 	// 127.0.0.1 当前仅监听本机回环
-	err := engine.Run("127.0.0.1:9998")
+	err := engine.Run("127.0.0.1:9999")
 	if err != nil {
 		slog.Error(err.Error())
 		return

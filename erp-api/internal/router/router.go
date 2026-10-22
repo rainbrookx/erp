@@ -72,7 +72,7 @@ func bindSystemConfigHandler(router *gin.RouterGroup) {
 }
 
 func bindNewMsgHandler(router *gin.RouterGroup) {
-	relativePath := ""
+	relativePath := "/msg"
 
 	r := router.Group(relativePath)
 	h := handler.NewMsgHandler()
