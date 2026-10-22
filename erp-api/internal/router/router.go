@@ -11,7 +11,8 @@ func InitRouter(router *gin.RouterGroup) {
 	bindFunctionHandler(router)
 	bindMaterialPropertyHandler(router)
 	bindSystemConfigHandler(router)
-	bindNewMsgHandler(router)
+	bindMsgHandler(router)
+	bindDepotHeadHandler(router)
 }
 
 // bindUserHandler 用户管理
@@ -71,11 +72,20 @@ func bindSystemConfigHandler(router *gin.RouterGroup) {
 	r.GET("/getCurrentInfo", h.GetCurrentInfo)
 }
 
-func bindNewMsgHandler(router *gin.RouterGroup) {
+func bindMsgHandler(router *gin.RouterGroup) {
 	relativePath := "/msg"
 
 	r := router.Group(relativePath)
 	h := handler.NewMsgHandler()
 
 	r.GET("/list", h.List)
+}
+
+func bindDepotHeadHandler(router *gin.RouterGroup) {
+	relativePath := "/depotHead"
+
+	r := router.Group(relativePath)
+	h := handler.NewDepotHeadHandler()
+
+	r.GET("/getBuyAndSaleStatistics", h.GetBuyAndSaleStatistics)
 }

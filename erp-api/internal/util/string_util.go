@@ -40,3 +40,15 @@ func ParseDateToStr2(t *time.Time) string {
 	}
 	return t.Format("2006-01-02 15:04:05")
 }
+
+func StringsToInt64s(ss []string) []int64 {
+	result := make([]int64, 0, len(ss))
+	for _, s := range ss {
+		n, err := strconv.ParseInt(s, 10, 64)
+		if err != nil {
+			continue
+		}
+		result = append(result, n)
+	}
+	return result
+}

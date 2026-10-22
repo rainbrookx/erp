@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	"github.com/gin-gonic/gin"
 	"github.com/rainbrookx/erp/internal/model"
 	"github.com/rainbrookx/erp/internal/query"
 	"gorm.io/gorm"
@@ -46,4 +47,14 @@ func UserCount(ctx context.Context, tenantID int64) (int64, error) {
 			u.TenantID.Eq(tenantID),
 		).
 		Count()
+}
+
+func GetRoleWithoutTenant(ctx *gin.Context, roleId int64) (*model.Role, error) {
+	r := query.Q.Role
+
+	return r.WithContext(ctx).
+		Where(
+			r.DeleteFlag.Neq("1"),
+			r.ID.Eq(roleId),
+		).First()
 }

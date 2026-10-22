@@ -169,3 +169,39 @@ func GetBtnStrArrById(ctx *gin.Context, userId int64) ([]dto.BtnStrDto, error) {
 
 	return btnStrWithUrlArr, nil
 }
+
+func GetRoleTypeByUserId(ctx *gin.Context, userId int64) (*model.Role, error) {
+	var role *model.Role
+
+	list, err := repository.ListUserBusinessByKeyIdAndType(ctx, strconv.FormatInt(userId, 10), "UserRole")
+	if err != nil {
+		return nil, err
+	}
+
+	if len(list) > 0 {
+		values := list[0].Value
+
+		if values != nil {
+			*values = strings.ReplaceAll(strings.ReplaceAll(*values, "[", ""), "]", "")
+			valueArray := strings.Split(*values, ",")
+
+			if len(valueArray) > 0 {
+				roleId, err2 := strconv.ParseInt(valueArray[0], 10, 64)
+				if err2 != nil {
+					return nil, err2
+				}
+
+				role, err2 = GetRoleWithoutTenant(ctx, roleId)
+				if err2 != nil {
+					return nil, err2
+				}
+			}
+		}
+	}
+
+	return role, nil
+}
+
+func GetRoleWithoutTenant(ctx *gin.Context, roleId int64) (*model.Role, error) {
+	return repository.GetRoleWithoutTenant(ctx, roleId)
+}

@@ -45,7 +45,9 @@
 
 - golang 默认0值
 - 数据库 bool 用 bit(1) 的坑
-- 原始 Java 代码有太多的“隐式依赖”
+- 原始 Java 代码有较多的“隐式依赖”
+- 原始 Java 代码有较多的“循环依赖”，例如 `TenantService`、`UserService`，当然字段注入加上三级缓存解决的
+- Spring 三级缓存：为了解决有循环依赖 + AOP，如果不要 AOP，那么两级缓存可以解决循环依赖（setter / 字段注入的循环依赖）
 
 ## Java 的隐式依赖（缺点）
 
