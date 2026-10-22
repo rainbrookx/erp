@@ -13,6 +13,7 @@ func InitRouter(router *gin.RouterGroup) {
 	bindSystemConfigHandler(router)
 	bindMsgHandler(router)
 	bindDepotHeadHandler(router)
+	bindDepotItemHandler(router)
 }
 
 // bindUserHandler 用户管理
@@ -79,6 +80,7 @@ func bindMsgHandler(router *gin.RouterGroup) {
 	h := handler.NewMsgHandler()
 
 	r.GET("/list", h.List)
+	r.GET("/getMsgByStatus", h.GetMsgByStatus)
 }
 
 func bindDepotHeadHandler(router *gin.RouterGroup) {
@@ -88,4 +90,13 @@ func bindDepotHeadHandler(router *gin.RouterGroup) {
 	h := handler.NewDepotHeadHandler()
 
 	r.GET("/getBuyAndSaleStatistics", h.GetBuyAndSaleStatistics)
+}
+
+func bindDepotItemHandler(router *gin.RouterGroup) {
+	relativePath := "/depotItem"
+
+	r := router.Group(relativePath)
+	h := handler.NewDepotItemHandler()
+
+	r.GET("/buyOrSalePrice", h.BuyOrSalePrice)
 }

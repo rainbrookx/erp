@@ -55,3 +55,10 @@ func (h MsgHandler) List(c *gin.Context) {
 		"rows":  msg,
 	}))
 }
+
+func (h MsgHandler) GetMsgByStatus(ctx *gin.Context) {
+	ctx.JSON(200, dto.Response[string]{
+		Code: 500,
+		Data: "接口展未实现",
+	})
+}
